@@ -1,0 +1,14 @@
+# Foundry build artefacts
+out/
+cache/
+broadcast/
+test/scratch/
+
+# Local secrets
+.env
+.env.*
+
+# The vendored OpenZeppelin tree ships a .gitmodules of its own. It is not a
+# submodule of this repository (the contracts are committed as plain files) and
+# it is excluded here so no submodule declaration is committed anywhere.
+lib/openzeppelin-contracts/.gitmodules
