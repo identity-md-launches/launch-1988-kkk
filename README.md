@@ -21,7 +21,8 @@ script/Seed.s.sol            staff, two policies, three items, funds a demo rent
 script/demo.sh               full local walk-through on Anvil using cast
 test/RentalEscrow.t.sol      unit tests (47)
 test/RentalEscrowFuzz.t.sol  property/fuzz tests (9)
-test/invariant/              handler + 8 stateful invariants
+test/WithdrawalRecovery.t.sol request-ID, rollback, handover and new-credit recovery (12 unit + 1 fuzz)
+test/invariant/              handler + 8 stateful invariants + 1 handler regression
 test/MockPaymentToken.t.sol  token tests (4, one fuzz)
 test/Scripts.t.sol           deploy/seed logic exercised without env or broadcast (3)
 docs/INTEGRATION.md          events, ABI surface, idempotency and recovery for the UI/backend
@@ -36,7 +37,7 @@ No git submodules are used; the verifier can build with no network.
 
 | Component | Version |
 |---|---|
-| Foundry (forge / cast / anvil) | 1.8.3 (commit `cae51ad`) |
+| Foundry (forge / cast / anvil) | 1.8.5 (commit `51a52c59cffd940f76eddd0b4bb1791aa4b5ac7f`) |
 | solc | 0.8.26 (pinned in `foundry.toml`), EVM `cancun` |
 | forge-std | v1.9.7 |
 | OpenZeppelin Contracts | v5.1.0 (`ERC20`, `SafeERC20`, `ReentrancyGuard`, `IERC20`) |
@@ -46,10 +47,10 @@ No git submodules are used; the verifier can build with no network.
 ```bash
 # Foundry 1.8.x: https://getfoundry.sh (forge installs solc 0.8.26 on first build)
 forge build
-forge test                                   # unit + fuzz + invariant, ~5 s
+forge test                                   # unit + fuzz + invariant
 forge fmt --check
 # reproduce the verifier's fuzz inputs exactly:
-FOUNDRY_FUZZ_SEED=0xa85ca939c64936ae8ea823718cfe66ec12c31ec61aa4224f74167592b3e17548 forge test
+FOUNDRY_FUZZ_SEED=0x447c6d16f6b8f650c2df614a0c8806cd5c423244a0b73be68e845fcb6b8b2fbd forge test
 # longer runs:
 forge test --fuzz-runs 5000
 forge test --match-path "test/invariant/*" -vv
@@ -67,8 +68,11 @@ ANVIL_URL=http://127.0.0.1:8545 script/demo.sh
 
 It deploys, seeds, reserves item 1, shows that a retry and a competing reservation are
 rejected, checks out, returns, withdraws the refund (twice: second reverts), cancels a second
-reservation with a fee, and withdraws the fee as admin. Expected output is reproduced in
-`docs/TEST-RESULTS.md`.
+reservation with a fee, and withdraws the new refund credit. A third cancellation brings
+fees to 10 dds. The admin withdraws 5 dds, retries the same request in a new mined transaction
+(which reverts), tries a conflicting recipient (also reverts), then withdraws the remaining
+5 dds with a new ID. The script checks receipts and final accounting and requires `python3`
+alongside Foundry. Results are recorded in `docs/TEST-RESULTS.md`.
 
 Manual equivalent:
 
@@ -131,7 +135,11 @@ cast send --private-key $ADMIN_KEY $ESCROW "createPolicy(uint256,uint256,uint64)
 cast send --private-key $ADMIN_KEY $ESCROW "addItem(uint64,string)" 1 "ipfs://..."
 cast send --private-key $ADMIN_KEY $ESCROW "setItemPolicy(uint256,uint64)" 1 2
 cast send --private-key $ADMIN_KEY $ESCROW "setItemListed(uint256,bool)" 1 false
-cast send --private-key $ADMIN_KEY $ESCROW "withdrawFees(address,uint256)" $TREASURY 5000000
+# Persist a unique request ID and payload BEFORE signing. Reuse it for every retry of this request.
+# This deterministic example is only for the fresh local demo; production request IDs must be unique.
+FEE_REQUEST=$(cast keccak "local-fee-request-1")
+cast send --private-key $ADMIN_KEY $ESCROW "withdrawFees(bytes32,address,uint256)" $FEE_REQUEST $TREASURY 5000000
+cast call $ESCROW "feeWithdrawalById(bytes32)(address,uint256,bool)" $FEE_REQUEST
 
 # accounting
 cast call $ESCROW "totalEscrowed()(uint256)"
@@ -161,13 +169,20 @@ cast call $ESCROW "totalLiabilities()(uint256)"       # must be <= token.balance
 7. **Return.** Staff only, status `Rented`. Full deposit credited, item `Available`.
 8. **Pull refunds.** `withdrawRefund` pays the caller's whole credit and zeroes it first.
    Each reservation has exactly one terminal transition, so a deposit is credited once.
+   The call pays the aggregate credit at execution; a new transaction after another reservation
+   settles may withdraw that new credit. See the receipt/event recovery procedure in the guide.
 9. **Admin powers.** Items, staff, policies, fee withdrawal (`withdrawFees` is capped by
    `accruedFees`, never by the token balance). Staff checks are evaluated at call time, so
    revocation is immediate. Two-step admin handover.
 10. **Idempotency.** `reserve` takes a caller-chosen non-zero `clientRef`, unique per renter.
-    Replaying it reverts with `ClientRefAlreadyUsed(ref, reservationId)`; every other
-    transition is guarded by status, and `withdrawRefund` reverts when the credit is zero.
-    Recovery procedure: `docs/INTEGRATION.md`, "Uncertain transaction outcome".
+    Replaying it reverts with `ClientRefAlreadyUsed(ref, reservationId)`. Reservation transitions
+    are guarded by status. Fee withdrawals require a non-zero `requestId`, permanent across admin
+    handovers. Identical replays revert with `FeeWithdrawalAlreadyCompleted`; conflicting payloads
+    revert with `FeeWithdrawalConflict`. Both errors contain the original recipient and amount.
+    `feeWithdrawalById` and `FeesWithdrawn` support recovery. Failed transfers roll everything
+    back, including the request ID. A fresh ID permits a new payment. Refund withdrawals have no
+    request ID; they revert only when the current credit is zero.
+    Recovery procedure: `docs/INTEGRATION.md`, "Idempotency and uncertain transaction outcome".
 
 Exact boundary: at `t == expiresAt` cancel and checkOut revert and expire succeeds; at
 `t == expiresAt - 1` the reverse.
@@ -199,14 +214,19 @@ defaults to `msg.sender`. Name/symbol/decimals/supply are compiled constants.
 
 - **Admin** grants staff with `setStaff`, creates at least one policy with `createPolicy`
   and lists items with `addItem`. Until a policy and item exist nothing can be reserved.
-- **Admin** withdraws fees with `withdrawFees(to, amount)` and rotates itself with
+- **Admin** withdraws fees with `withdrawFees(requestId, to, amount)` and rotates itself with
   `transferAdmin` / `acceptAdmin`. Losing the admin key freezes administration (not funds:
-  renters can still cancel/expire/withdraw, staff can still check out and return).
+  renters can still cancel/expire/withdraw, staff can still check out and return). Persist globally
+  unique fee request IDs and payloads before sending, keep them for all retries, and transfer
+  that request ledger during admin handover. Completed IDs are never cleared on-chain.
 - **Staff** are the trusted signal for physical handover (`checkOut`) and return
   (`confirmReturn`). The contract cannot verify the physical world; a staff member who
   confirms a return that did not happen releases the deposit.
 - **Anyone** (typically the backend) calls `expire` for reservations past `expiresAt`. No
   one is paid for this; the backend should run it on a schedule.
+- **Backend operators** persist transaction hashes, sender nonces and replacement hashes, reconcile
+  confirmed receipts/events, and roll back reorged projections. Apply `ItemCheckedOut` to both
+  item and reservation state. A balance read is not proof of a particular payout.
 - **Renters** need an ERC-20 approval of at least the quoted deposit before `reserve`, and
   must call `withdrawRefund` themselves; credits are never pushed.
 
@@ -226,6 +246,26 @@ defaults to `msg.sender`. Name/symbol/decimals/supply are compiled constants.
   (by design: the admin must not be able to pull "surplus" that an accounting bug could
   misclassify).
 
+## Maintenance interface changes
+
+This iteration replaces `withdrawFees(address,uint256)` with
+`withdrawFees(bytes32 requestId,address to,uint256 amount)` and adds a durable public
+`feeWithdrawalById(bytes32)` lookup returning `(recipient, amount, completed)`.
+`FeesWithdrawn` now includes an indexed request ID before its indexed recipient, changing the
+signature to `FeesWithdrawn(bytes32,address,uint256)`. Consumers must regenerate ABIs and
+update calls and event filters. There is no legacy withdrawal overload that bypasses the ID.
+The three new custom errors and replay response are documented in `docs/INTEGRATION.md`.
+
+Constructor parameters, refund/reservation APIs, rental policies and accounting rules are
+unchanged. The escrow is not upgradeable: these source changes do not alter an existing
+contract or retroactively deduplicate old withdrawals. No public deployment or token change
+is performed by this iteration.
+
+The previous tree contains **71 individual tests/invariants**, not 64. The final tree has
+**85**: all 71 retained and 14 additions. Foundry 1.8.5 groups the eight invariants as one
+runner result, so its full-run footer reports 78 results; the per-function inventory is
+85. `docs/TEST-RESULTS.md` gives the exact inventory, commands and final results.
+
 ## Known limitations
 
 - Deposit is the only economic lever: there is no rental price, late fee or partial
@@ -242,6 +282,6 @@ defaults to `msg.sender`. Name/symbol/decimals/supply are compiled constants.
 
 ## Checks that could not run
 
-- Slither / Mythril are not installed on the build machine and were not run.
+- Slither / Mythril and an independent adversarial review were not run in this iteration.
 - No public-chain deployment, explorer verification or multisig handover was performed
   (source-only delivery).

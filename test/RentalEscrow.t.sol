@@ -746,25 +746,25 @@ contract RentalEscrowTest is EscrowTestBase {
 
         vm.prank(staff);
         vm.expectRevert(RentalEscrow.NotAdmin.selector);
-        escrow.withdrawFees(treasury, FEE);
+        escrow.withdrawFees(REF_A, treasury, FEE);
 
         vm.startPrank(admin);
         vm.expectRevert(RentalEscrow.ZeroAddress.selector);
-        escrow.withdrawFees(address(0), FEE);
+        escrow.withdrawFees(REF_A, address(0), FEE);
         vm.expectRevert(RentalEscrow.ZeroAmount.selector);
-        escrow.withdrawFees(treasury, 0);
+        escrow.withdrawFees(REF_A, treasury, 0);
         // The contract holds DEPOSIT, but only FEE is withdrawable: refund credits are untouchable.
         vm.expectRevert(abi.encodeWithSelector(RentalEscrow.InsufficientFees.selector, FEE + 1, FEE));
-        escrow.withdrawFees(treasury, FEE + 1);
+        escrow.withdrawFees(REF_A, treasury, FEE + 1);
         vm.expectRevert(abi.encodeWithSelector(RentalEscrow.InsufficientFees.selector, DEPOSIT, FEE));
-        escrow.withdrawFees(treasury, DEPOSIT);
+        escrow.withdrawFees(REF_A, treasury, DEPOSIT);
 
-        vm.expectEmit(true, false, false, true);
-        emit RentalEscrow.FeesWithdrawn(treasury, FEE - 1);
-        escrow.withdrawFees(treasury, FEE - 1);
-        escrow.withdrawFees(treasury, 1);
+        vm.expectEmit(true, true, false, true);
+        emit RentalEscrow.FeesWithdrawn(REF_A, treasury, FEE - 1);
+        escrow.withdrawFees(REF_A, treasury, FEE - 1);
+        escrow.withdrawFees(REF_B, treasury, 1);
         vm.expectRevert(abi.encodeWithSelector(RentalEscrow.InsufficientFees.selector, 1, 0));
-        escrow.withdrawFees(treasury, 1);
+        escrow.withdrawFees(keccak256("third-fee-request"), treasury, 1);
         vm.stopPrank();
 
         assertEq(token.balanceOf(treasury), FEE);
@@ -780,7 +780,7 @@ contract RentalEscrowTest is EscrowTestBase {
         assertEq(token.balanceOf(address(escrow)), DEPOSIT);
         vm.prank(admin);
         vm.expectRevert(abi.encodeWithSelector(RentalEscrow.InsufficientFees.selector, 1, 0));
-        escrow.withdrawFees(admin, 1);
+        escrow.withdrawFees(REF_A, admin, 1);
     }
 
     // ---------------------------------------------------------------------

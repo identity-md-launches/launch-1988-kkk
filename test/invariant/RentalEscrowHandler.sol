@@ -154,7 +154,8 @@ contract RentalEscrowHandler is Test {
         uint256 id = _reservation(reservationSeed);
         if (id == 0) return;
         RentalEscrow.Reservation memory r = escrow.getReservation(id);
-        address caller = asRenter ? r.renter : _renter(reservationSeed + 1);
+        // Reduce an arbitrary fuzz seed before adding: uint256.max must not panic in the harness.
+        address caller = asRenter ? r.renter : _renter((reservationSeed % renters.length) + 1);
         vm.prank(caller);
         try escrow.cancel(id) {
             assertEq(caller, r.renter, "handler: non-renter cancelled");
@@ -238,7 +239,7 @@ contract RentalEscrowHandler is Test {
         uint256 balance = token.balanceOf(address(escrow));
         uint256 amount = bound(amountSeed, 0, balance + 1);
         vm.prank(admin);
-        try escrow.withdrawFees(admin, amount) {
+        try escrow.withdrawFees(keccak256(abi.encode("fee", calls[keccak256("withdrawFees")])), admin, amount) {
             assertTrue(amount > 0 && amount <= fees, "handler: over-withdrew fees");
             ghostFeesPaid += amount;
         } catch {

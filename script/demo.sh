@@ -3,9 +3,9 @@
 #
 # Starts Anvil (unless ANVIL_URL points at a running node), deploys the mock token and the escrow,
 # seeds policies/items/staff, then walks one reservation through checkout, return and refund, and a
-# second one through cancellation and fee withdrawal. Every step prints the cast command it ran.
+# two more through cancellation, new refund credit and fee withdrawals with durable request IDs.
 #
-# Requirements: foundry (forge, cast, anvil) on PATH. Nothing leaves this machine.
+# Requirements: foundry (forge, cast, anvil) and python3 on PATH. Use a local Anvil only.
 #
 # Usage:
 #   script/demo.sh                      # start a throwaway anvil on 127.0.0.1:8545, run, stop it
@@ -39,11 +39,26 @@ fi
 export ETH_RPC_URL="$ANVIL_URL"
 
 run() { echo "+ $*"; "$@"; }
-send() { # send <key> <to> <sig> [args...]  -> prints tx status
+send() { # send <key> <to> <sig> [args...]; record the mined hash and sender nonce
   local key=$1; shift
-  local out
-  out=$(cast send --private-key "$key" --json "$@")
-  echo "$out" | sed -E 's/.*"status":"(0x[0-9a-f]+)".*/   status=\1/'
+  LAST_TX_HASH=$(cast send --private-key "$key" --async "$@")
+  LAST_RECEIPT=$(cast receipt "$LAST_TX_HASH" --json)
+  LAST_TX_NONCE=$(cast tx "$LAST_TX_HASH" nonce)
+  python3 -c 'import json,sys; r=json.load(sys.stdin); assert int(r["status"],16)==1, r' <<<"$LAST_RECEIPT"
+  echo "   status=0x1 nonce=$LAST_TX_NONCE tx=$LAST_TX_HASH"
+}
+expect_mined_revert() { # Force inclusion at a new nonce so this checks a real transaction retry.
+  local key=$1; shift
+  LAST_TX_HASH=$(cast send --private-key "$key" --gas-limit 300000 --async "$@")
+  LAST_RECEIPT=$(cast receipt "$LAST_TX_HASH" --json)
+  LAST_TX_NONCE=$(cast tx "$LAST_TX_HASH" nonce)
+  python3 -c 'import json,sys; r=json.load(sys.stdin); assert int(r["status"],16)==0 and not r["logs"], r' <<<"$LAST_RECEIPT"
+  echo "   status=0x0 nonce=$LAST_TX_NONCE tx=$LAST_TX_HASH (no surviving logs)"
+}
+assert_uint() { # Compare uint call output (cast may append a decimal scientific notation hint).
+  local actual
+  actual=$(cast call "$1" "$2" "${@:4}")
+  [[ "${actual%% *}" == "$3" ]] || { echo "expected $3, got $actual for $2"; exit 1; }
 }
 
 echo "== deploying (admin = token holder = $ADMIN)"
@@ -98,6 +113,8 @@ echo "   refund credit of renter: $(cast call "$ESCROW" "refundCreditOf(address)
 
 echo "== renter withdraws the refund (second withdrawal reverts)"
 send "$RENTER_KEY" "$ESCROW" "withdrawRefund()"
+FIRST_REFUND_TX=$LAST_TX_HASH
+FIRST_REFUND_NONCE=$LAST_TX_NONCE
 if cast send --private-key "$RENTER_KEY" "$ESCROW" "withdrawRefund()" >/dev/null 2>&1; then
   echo "   UNEXPECTED: second withdrawal succeeded"; exit 1
 else
@@ -110,19 +127,52 @@ send "$RENTER_KEY" "$TOKEN" "approve(address,uint256)" "$ESCROW" 50000000
 send "$RENTER_KEY" "$ESCROW" "reserve(uint256,uint64,bytes32)" 2 1 "$REF2"
 send "$RENTER_KEY" "$ESCROW" "cancel(uint256)" 2
 echo "   refund credit: $(cast call "$ESCROW" "refundCreditOf(address)(uint256)" "$RENTER")   accrued fees: $(cast call "$ESCROW" "accruedFees()(uint256)")"
+echo "== a new transaction withdraws the intervening 45 dds credit"
 send "$RENTER_KEY" "$ESCROW" "withdrawRefund()"
+echo "   earlier refund: nonce=$FIRST_REFUND_NONCE tx=$FIRST_REFUND_TX; this is a distinct payout"
+assert_uint "$TOKEN" "balanceOf(address)(uint256)" 995000000 "$RENTER"
+
+echo "== a third reservation is cancelled, bringing earned fees to 10 dds"
+send "$RENTER_KEY" "$TOKEN" "approve(address,uint256)" "$ESCROW" 50000000
+send "$RENTER_KEY" "$ESCROW" "reserve(uint256,uint64,bytes32)" 2 1 "$(cast keccak order-3)"
+send "$RENTER_KEY" "$ESCROW" "cancel(uint256)" 3
+send "$RENTER_KEY" "$ESCROW" "withdrawRefund()"
+assert_uint "$ESCROW" "accruedFees()(uint256)" 10000000
 
 echo "== admin withdraws the earned fee; trying more than earned reverts"
-if cast send --private-key "$ADMIN_KEY" "$ESCROW" "withdrawFees(address,uint256)" "$ADMIN" 5000001 >/dev/null 2>&1; then
+FEE_REQUEST_A=$(cast keccak "fee-request-a")
+FEE_REQUEST_B=$(cast keccak "fee-request-b")
+if cast send --private-key "$ADMIN_KEY" "$ESCROW" "withdrawFees(bytes32,address,uint256)" "$FEE_REQUEST_A" "$ADMIN" 10000001 >/dev/null 2>&1; then
   echo "   UNEXPECTED: over-withdrawal succeeded"; exit 1
 else
   echo "   over-withdrawal rejected as expected (InsufficientFees)"
 fi
-send "$ADMIN_KEY" "$ESCROW" "withdrawFees(address,uint256)" "$ADMIN" 5000000
+send "$ADMIN_KEY" "$ESCROW" "withdrawFees(bytes32,address,uint256)" "$FEE_REQUEST_A" "$ADMIN" 5000000
+FIRST_FEE_NONCE=$LAST_TX_NONCE
+run cast call "$ESCROW" "feeWithdrawalById(bytes32)(address,uint256,bool)" "$FEE_REQUEST_A"
+assert_uint "$ESCROW" "accruedFees()(uint256)" 5000000
+
+echo "== same fee request in a new transaction cannot pay the remaining 5 dds again"
+expect_mined_revert "$ADMIN_KEY" "$ESCROW" "withdrawFees(bytes32,address,uint256)" "$FEE_REQUEST_A" "$ADMIN" 5000000
+[[ "$LAST_TX_NONCE" != "$FIRST_FEE_NONCE" ]] || { echo "retry did not use a new nonce"; exit 1; }
+assert_uint "$ESCROW" "accruedFees()(uint256)" 5000000
+assert_uint "$TOKEN" "balanceOf(address)(uint256)" 5000000 "$ESCROW"
+
+echo "== conflicting payload with the completed ID is also rejected"
+expect_mined_revert "$ADMIN_KEY" "$ESCROW" "withdrawFees(bytes32,address,uint256)" "$FEE_REQUEST_A" "$RENTER" 5000000
+assert_uint "$ESCROW" "accruedFees()(uint256)" 5000000
+
+echo "== a distinct ID legitimately withdraws the remaining 5 dds"
+send "$ADMIN_KEY" "$ESCROW" "withdrawFees(bytes32,address,uint256)" "$FEE_REQUEST_B" "$ADMIN" 5000000
+run cast call "$ESCROW" "feeWithdrawalById(bytes32)(address,uint256,bool)" "$FEE_REQUEST_A"
+run cast call "$ESCROW" "feeWithdrawalById(bytes32)(address,uint256,bool)" "$FEE_REQUEST_B"
+assert_uint "$TOKEN" "balanceOf(address)(uint256)" 0 "$ESCROW"
+assert_uint "$ESCROW" "totalLiabilities()(uint256)" 0
+assert_uint "$TOKEN" "balanceOf(address)(uint256)" 990000000 "$RENTER"
 
 echo "== final accounting"
 echo "   escrow token balance: $(cast call "$TOKEN" "balanceOf(address)(uint256)" "$ESCROW")"
 echo "   totalLiabilities:     $(cast call "$ESCROW" "totalLiabilities()(uint256)")"
-echo "   renter balance:       $(cast call "$TOKEN" "balanceOf(address)(uint256)" "$RENTER")  (started with 1000000000, paid one 5000000 fee)"
+echo "   renter balance:       $(cast call "$TOKEN" "balanceOf(address)(uint256)" "$RENTER")  (started with 1000000000, paid two 5000000 fees)"
 echo "== demo complete"
 if [[ $STARTED_ANVIL -eq 1 ]]; then echo "== stopping anvil"; fi

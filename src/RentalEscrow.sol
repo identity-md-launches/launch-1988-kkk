@@ -71,6 +71,13 @@ contract RentalEscrow is ReentrancyGuard {
         bytes32 clientRef; // caller-chosen idempotency key, unique per renter
     }
 
+    /// @notice Permanent result of one successful fee withdrawal request.
+    struct FeeWithdrawal {
+        address recipient;
+        uint256 amount;
+        bool completed;
+    }
+
     // ---------------------------------------------------------------------
     // Storage
     // ---------------------------------------------------------------------
@@ -106,6 +113,10 @@ contract RentalEscrow is ReentrancyGuard {
     uint256 public totalRefundCredits;
     /// @notice Cancellation fees earned and not yet withdrawn by the administrator.
     uint256 public accruedFees;
+
+    /// @notice Request ID => completed result. Global to this escrow, including across admin handovers.
+    /// @dev An unused or reverted request returns (address(0), 0, false). Completed records are never cleared.
+    mapping(bytes32 => FeeWithdrawal) public feeWithdrawalById;
 
     // ---------------------------------------------------------------------
     // Events
@@ -145,7 +156,7 @@ contract RentalEscrow is ReentrancyGuard {
     event ItemReturned(uint256 indexed reservationId, uint256 indexed itemId, address indexed staff, uint256 refund);
     event RefundCredited(address indexed beneficiary, uint256 indexed reservationId, uint256 amount);
     event RefundWithdrawn(address indexed beneficiary, uint256 amount);
-    event FeesWithdrawn(address indexed to, uint256 amount);
+    event FeesWithdrawn(bytes32 indexed requestId, address indexed to, uint256 amount);
 
     // ---------------------------------------------------------------------
     // Errors
@@ -172,6 +183,9 @@ contract RentalEscrow is ReentrancyGuard {
     error DepositMismatch(uint256 expected, uint256 received);
     error NothingToWithdraw();
     error InsufficientFees(uint256 requested, uint256 available);
+    error FeeWithdrawalIdRequired();
+    error FeeWithdrawalAlreadyCompleted(bytes32 requestId, address recipient, uint256 amount);
+    error FeeWithdrawalConflict(bytes32 requestId, address recipient, uint256 amount);
 
     // ---------------------------------------------------------------------
     // Modifiers
@@ -281,13 +295,26 @@ contract RentalEscrow is ReentrancyGuard {
     }
 
     /// @notice Withdraw earned cancellation fees. Escrowed deposits and refund credits are never reachable here.
-    function withdrawFees(address to, uint256 amount) external nonReentrant onlyAdmin {
+    /// @dev Matching retries revert with the recorded result; conflicting payloads revert with
+    ///      FeeWithdrawalConflict carrying the original result. Neither retry moves tokens or emits an event.
+    ///      A failed transfer rolls back the result, fee deduction and event, allowing the same ID to be retried.
+    /// @param requestId Non-zero application request ID, unique for this escrow's entire lifetime.
+    function withdrawFees(bytes32 requestId, address to, uint256 amount) external nonReentrant onlyAdmin {
+        if (requestId == bytes32(0)) revert FeeWithdrawalIdRequired();
+        FeeWithdrawal memory previous = feeWithdrawalById[requestId];
+        if (previous.completed) {
+            if (previous.recipient != to || previous.amount != amount) {
+                revert FeeWithdrawalConflict(requestId, previous.recipient, previous.amount);
+            }
+            revert FeeWithdrawalAlreadyCompleted(requestId, previous.recipient, previous.amount);
+        }
         if (to == address(0)) revert ZeroAddress();
         if (amount == 0) revert ZeroAmount();
         uint256 available = accruedFees;
         if (amount > available) revert InsufficientFees(amount, available);
         accruedFees = available - amount;
-        emit FeesWithdrawn(to, amount);
+        feeWithdrawalById[requestId] = FeeWithdrawal({recipient: to, amount: amount, completed: true});
+        emit FeesWithdrawn(requestId, to, amount);
         token.safeTransfer(to, amount);
     }
 
@@ -370,6 +397,8 @@ contract RentalEscrow is ReentrancyGuard {
     }
 
     /// @notice Withdraw the caller's whole refund credit. Reverts if there is nothing to withdraw.
+    /// @dev This pays the aggregate credit at execution, not a particular application request.
+    ///      New settlements between calls can produce new credit that a later call will withdraw.
     function withdrawRefund() external nonReentrant returns (uint256 amount) {
         amount = refundCreditOf[msg.sender];
         if (amount == 0) revert NothingToWithdraw();

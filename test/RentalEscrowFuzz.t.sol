@@ -183,7 +183,7 @@ contract RentalEscrowFuzzTest is EscrowTestBase {
         assertEq(escrow.reservationByRef(b, refB), 0);
     }
 
-    /// A refund can be withdrawn once; any number of retries pay nothing more.
+    /// With no intervening settlements, a refund is paid once and subsequent calls revert.
     function testFuzz_refundRetries(uint8 retries, bool viaReturn) public {
         uint256 id = _reserve(renter, itemId, REF_A);
         uint256 expected;
@@ -282,9 +282,9 @@ contract RentalEscrowFuzzTest is EscrowTestBase {
         vm.prank(admin);
         if (amount > fees) {
             vm.expectRevert(abi.encodeWithSelector(RentalEscrow.InsufficientFees.selector, amount, fees));
-            escrow.withdrawFees(admin, amount);
+            escrow.withdrawFees(REF_A, admin, amount);
         } else {
-            escrow.withdrawFees(admin, amount);
+            escrow.withdrawFees(REF_A, admin, amount);
             assertEq(escrow.accruedFees(), fees - amount);
         }
         _assertConservation();
@@ -310,7 +310,7 @@ contract RentalEscrowFuzzTest is EscrowTestBase {
         vm.expectRevert(RentalEscrow.NotAdmin.selector);
         escrow.setStaff(caller, true);
         vm.expectRevert(RentalEscrow.NotAdmin.selector);
-        escrow.withdrawFees(caller, 1);
+        escrow.withdrawFees(REF_A, caller, 1);
         vm.expectRevert(RentalEscrow.NotAdmin.selector);
         escrow.createPolicy(1, 0, 1);
         vm.expectRevert(RentalEscrow.NotAdmin.selector);
