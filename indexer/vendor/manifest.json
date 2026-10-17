@@ -1,0 +1,2285 @@
+{
+  "format": "rental-application-runtime-v1",
+  "scope": "Pinned rental application, Node 24; not a general npm package installation",
+  "lockSha256": "62745eff89b57dd71c1398e8d74262e76985fed43010c69adfc12df3ff081a67",
+  "packageSha256": "31a20ecd891890446f56f275cbbdd56501f31ef420a3dc25c4ab9ead7803c879",
+  "selectionSha256": "3afaddb87a68b21d7513fb5ff51f3dbb67a0ab917c5cedb2015d81020de2d04f",
+  "packages": [
+    {
+      "package": "node_modules/@adraffy/ens-normalize",
+      "version": "1.11.1",
+      "integrity": "sha512-nhCBV3quEgesuf7c7KYfperqSS14T8bYuvJ8PcLJp6znkZpFc0AuW4qBtr8eKVyPPe/8RSr7sglCWPU5eaxwKQ==",
+      "source": "https://registry.npmjs.org/@adraffy/ens-normalize/-/ens-normalize-1.11.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 9
+      }
+    },
+    {
+      "package": "node_modules/@babel/code-frame",
+      "version": "7.29.7",
+      "integrity": "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==",
+      "source": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "source map": 1
+      }
+    },
+    {
+      "package": "node_modules/@babel/helper-validator-identifier",
+      "version": "7.29.7",
+      "integrity": "sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==",
+      "source": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.29.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "source map": 3
+      }
+    },
+    {
+      "package": "node_modules/@commander-js/extra-typings",
+      "version": "12.1.0",
+      "integrity": "sha512-wf/lwQvWAA0goIghcb91dQYpkLBcyhOhQNqG/VgWhnKzgt+UOMvra7EX/2fv70arm5RW+PUHoQHHDa6/p77Eqg==",
+      "source": "https://registry.npmjs.org/@commander-js/extra-typings/-/extra-typings-12.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@electric-sql/pglite",
+      "version": "0.2.13",
+      "integrity": "sha512-YRY806NnScVqa21/1L1vaysSQ+0/cAva50z7vlwzaGiBOTS9JhdzIRHN0KfgMhobFAphbznZJ7urMso4RtMBIQ==",
+      "source": "https://registry.npmjs.org/@electric-sql/pglite/-/pglite-0.2.13.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 71,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 55,
+        "optional PostgreSQL extension not used by this application": 48,
+        "source map": 61
+      }
+    },
+    {
+      "package": "node_modules/@envelop/core",
+      "version": "5.6.1",
+      "integrity": "sha512-KEbJ7yrAA+W7IY9MZzpZJ77w/72ndaV/16+hhPapd+0Ohjqffl0mmF3QWy62/m3nRP4qidD+1eiEjJhS/O38Tg==",
+      "source": "https://registry.npmjs.org/@envelop/core/-/core-5.6.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 49,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 15
+      }
+    },
+    {
+      "package": "node_modules/@envelop/instrumentation",
+      "version": "1.0.1",
+      "integrity": "sha512-FuexE2qd3Yc1Kh1DjTliwGxb9kyyv4ySBNnfJOxnQasVmGdcqX6AkkO5sIMxLWFRftp8PErOcIn2dQW/1RwytQ==",
+      "source": "https://registry.npmjs.org/@envelop/instrumentation/-/instrumentation-1.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 10,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@envelop/types",
+      "version": "5.2.2",
+      "integrity": "sha512-nl9cmUh8F+2/NNzpcLjzNqtaVn0m8XSzzxrPU2ByHhlz4Hqlc5QBfRsemZkoJMKrMviJXyJYdKZiUP1o70F3Kw==",
+      "source": "https://registry.npmjs.org/@envelop/types/-/types-5.2.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 24,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 7
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-aliases",
+      "version": "2.6.2",
+      "integrity": "sha512-SDk7pAzY6gutsdZ3NlyY55RrytrCPxJJxSN/DBfIGKphTrfBvKQWTnioQ9OlLP9kPjCE6XM5UWwGt7uqbpKSYA==",
+      "source": "https://registry.npmjs.org/@escape.tech/graphql-armor-max-aliases/-/graphql-armor-max-aliases-2.6.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-aliases/node_modules/graphql",
+      "version": "16.14.2",
+      "integrity": "sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==",
+      "source": "https://registry.npmjs.org/graphql/-/graphql-16.14.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 261,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 136
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-depth",
+      "version": "2.4.2",
+      "integrity": "sha512-J9fbW1+W4u3GAcf19wwS0zrNGICCbWn/glvopCoC11Ga0reXvGwgr8EcyuHjTFLL7+pPvWAeVhP4qo6hybcB9w==",
+      "source": "https://registry.npmjs.org/@escape.tech/graphql-armor-max-depth/-/graphql-armor-max-depth-2.4.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-depth/node_modules/graphql",
+      "version": "16.14.2",
+      "integrity": "sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==",
+      "source": "https://registry.npmjs.org/graphql/-/graphql-16.14.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 261,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 136
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-tokens",
+      "version": "2.5.1",
+      "integrity": "sha512-XHui2npOz7Jn8shBZqfyeocWhdl0pUbKiaWmvbF+5rvNoRIGMgwMtaVhmf9ia8oGGbd+cx5EYo1v+oKHzIm79w==",
+      "source": "https://registry.npmjs.org/@escape.tech/graphql-armor-max-tokens/-/graphql-armor-max-tokens-2.5.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-max-tokens/node_modules/graphql",
+      "version": "16.14.2",
+      "integrity": "sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==",
+      "source": "https://registry.npmjs.org/graphql/-/graphql-16.14.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 261,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 136
+      }
+    },
+    {
+      "package": "node_modules/@escape.tech/graphql-armor-types",
+      "version": "0.7.0",
+      "integrity": "sha512-RHxyyp6PDgS6NAPnnmB6JdmUJ6oqhpSHFbsglGWeCcnNzceA5AkQFpir7VIDbVyS8LNC1xhipOtk7f9ycrIemQ==",
+      "source": "https://registry.npmjs.org/@escape.tech/graphql-armor-types/-/graphql-armor-types-0.7.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4
+      }
+    },
+    {
+      "package": "node_modules/@fastify/busboy",
+      "version": "3.2.3",
+      "integrity": "sha512-fmo/IKgkenPzz3qTKG+sIUXdF/Kv83AkvvOXJHPTHJeKJbat8SsL1ihUaFaDotqoEl4UZ1Lf8Eb/3vK6eaWX2A==",
+      "source": "https://registry.npmjs.org/@fastify/busboy/-/busboy-3.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 18,
+      "excludedFilesByReason": {
+        "duplicate TypeScript source": 2
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/executor",
+      "version": "1.5.7",
+      "integrity": "sha512-UcXVClkBml+qyGEsQxfEaAkboqySVGFUd9ivn7pDc9jZSckgF6zL21cNxuRH5ZA2exneV3PTtcc0I0rDOdE0Tg==",
+      "source": "https://registry.npmjs.org/@graphql-tools/executor/-/executor-1.5.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 30,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 9
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/executor/node_modules/@graphql-tools/utils",
+      "version": "11.2.2",
+      "integrity": "sha512-Do2A/t6ayqOma8m7PvpYMsCBswL+NB35BQSng4GWSBqafL2/BnfAZy/NSENPwV721Rm2fG0BHETFC0+FJJZmLw==",
+      "source": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-11.2.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 188,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 62
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/merge",
+      "version": "9.2.8",
+      "integrity": "sha512-OsCEmJ9RIMT4LB/1jBbyKHe7pMIlfGhLAQ0FVNaZqteydDUC+rTI9wZ+yaKqxQpPOFFycD+UtMhovg19lPq92Q==",
+      "source": "https://registry.npmjs.org/@graphql-tools/merge/-/merge-9.2.8.tgz",
+      "license": "MIT",
+      "retainedFiles": 63,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 20
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/merge/node_modules/@graphql-tools/utils",
+      "version": "12.1.0",
+      "integrity": "sha512-+mOuIX7u83/BHG0L9JviMzKid1j35cxOWhLoox47TXHAJ6Tnn30RgrmEQPmk1FhmaQbhJEcwYBDVyieUvZopJw==",
+      "source": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-12.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 197,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 65
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/merge/node_modules/@whatwg-node/promise-helpers",
+      "version": "2.0.0",
+      "integrity": "sha512-/i9CS0Z96o+cPwaYoAyVxAThDiUX1wV3tDmNWPJbn+vtdR+JftuCDg1NGCXBrzIYVDGkJ8uT6ctwmrBOUzOpKQ==",
+      "source": "https://registry.npmjs.org/@whatwg-node/promise-helpers/-/promise-helpers-2.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/schema",
+      "version": "10.1.5",
+      "integrity": "sha512-F0Onw0ZBREakKGqcgsKhdSCjOXgmntzQWL0QA+/WrwKmnJ7nJRyGKUJavwuVZL2TrXblaIUvQxm4t1h3FuA3cA==",
+      "source": "https://registry.npmjs.org/@graphql-tools/schema/-/schema-10.1.5.tgz",
+      "license": "MIT",
+      "retainedFiles": 30,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 9
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/schema/node_modules/@graphql-tools/utils",
+      "version": "12.1.0",
+      "integrity": "sha512-+mOuIX7u83/BHG0L9JviMzKid1j35cxOWhLoox47TXHAJ6Tnn30RgrmEQPmk1FhmaQbhJEcwYBDVyieUvZopJw==",
+      "source": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-12.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 197,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 65
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/schema/node_modules/@whatwg-node/promise-helpers",
+      "version": "2.0.0",
+      "integrity": "sha512-/i9CS0Z96o+cPwaYoAyVxAThDiUX1wV3tDmNWPJbn+vtdR+JftuCDg1NGCXBrzIYVDGkJ8uT6ctwmrBOUzOpKQ==",
+      "source": "https://registry.npmjs.org/@whatwg-node/promise-helpers/-/promise-helpers-2.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/@graphql-tools/utils",
+      "version": "10.11.0",
+      "integrity": "sha512-iBFR9GXIs0gCD+yc3hoNswViL1O5josI33dUqiNStFI/MHLCEPduasceAcazRH77YONKNiviHBV8f7OgcT4o2Q==",
+      "source": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.11.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 185,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 61
+      }
+    },
+    {
+      "package": "node_modules/@graphql-typed-document-node/core",
+      "version": "3.2.0",
+      "integrity": "sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==",
+      "source": "https://registry.npmjs.org/@graphql-typed-document-node/core/-/core-3.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/@graphql-yoga/logger",
+      "version": "2.0.2",
+      "integrity": "sha512-k2QGHCcH10O+GGe1sgXn0paaP9GCK91wxkuNQaA4IvXBF/RcdBLaX15UeZLW9kMG8kfz7bL0r4Yu+BXYe0JOaw==",
+      "source": "https://registry.npmjs.org/@graphql-yoga/logger/-/logger-2.0.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/@graphql-yoga/subscription",
+      "version": "5.1.1",
+      "integrity": "sha512-I48DpyPTxYzmO5TwvKOXxiLI/tsbyeYNhb4/6/oJEBn6nlb8snHL0G0Fw1LC2ApNW1QKYuCPRDTp9yUwVBqhNQ==",
+      "source": "https://registry.npmjs.org/@graphql-yoga/subscription/-/subscription-5.1.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 18,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 5
+      }
+    },
+    {
+      "package": "node_modules/@graphql-yoga/typed-event-target",
+      "version": "3.0.3",
+      "integrity": "sha512-j/EgVfZSzKA2lVeiZ0un8E2eVIqWa9Woyqta4A40ht1M93ui9CDVHU6pmphoQTpFa92BNbMVexXdOtMQk8LCjA==",
+      "source": "https://registry.npmjs.org/@graphql-yoga/typed-event-target/-/typed-event-target-3.0.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/@hono/node-server",
+      "version": "1.19.5",
+      "integrity": "sha512-iBuhh+uaaggeAuf+TftcjZyWh2GEgZcVGXkNtskLVoWaXhnJtC5HLHrU8W1KHDoucqO1MswwglmkWLFyiDn4WQ==",
+      "source": "https://registry.npmjs.org/@hono/node-server/-/node-server-1.19.5.tgz",
+      "license": "MIT",
+      "retainedFiles": 29,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 25
+      }
+    },
+    {
+      "package": "node_modules/@isaacs/cliui",
+      "version": "8.0.2",
+      "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
+      "source": "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz",
+      "license": "ISC",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/@noble/ciphers",
+      "version": "1.3.0",
+      "integrity": "sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==",
+      "source": "https://registry.npmjs.org/@noble/ciphers/-/ciphers-1.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 33,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 28,
+        "source map": 56,
+        "duplicate TypeScript source": 14
+      }
+    },
+    {
+      "package": "node_modules/@noble/curves",
+      "version": "1.9.1",
+      "integrity": "sha512-k11yZxZg+t+gWvBbIswW0yoJlu8cHOC7dhunwOzoWH/mXGBiYyR4YY6hAEK/3EUs4UpB8la1RfdRpeGsFHkWsA==",
+      "source": "https://registry.npmjs.org/@noble/curves/-/curves-1.9.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 64,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 41,
+        "source map": 100,
+        "duplicate TypeScript source": 25
+      }
+    },
+    {
+      "package": "node_modules/@noble/hashes",
+      "version": "1.8.0",
+      "integrity": "sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==",
+      "source": "https://registry.npmjs.org/@noble/hashes/-/hashes-1.8.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 69,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 43,
+        "source map": 108,
+        "duplicate TypeScript source": 27
+      }
+    },
+    {
+      "package": "node_modules/@opentelemetry/api",
+      "version": "1.9.1",
+      "integrity": "sha512-gLyJlPHPZYdAk1JENA9LeHejZe1Ti77/pTeFm/nMXmQH/HFZlcS/O2XJB+L8fkbrNSqhdtlvjBVjxwUYanNH5Q==",
+      "source": "https://registry.npmjs.org/@opentelemetry/api/-/api-1.9.1.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 242,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 151,
+        "source map": 195
+      }
+    },
+    {
+      "package": "node_modules/@oxc-project/types",
+      "version": "0.154.0",
+      "integrity": "sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==",
+      "source": "https://registry.npmjs.org/@oxc-project/types/-/types-0.154.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 1
+      }
+    },
+    {
+      "package": "node_modules/@pkgjs/parseargs",
+      "version": "0.11.0",
+      "integrity": "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==",
+      "source": "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6,
+        "upstream test/example": 6,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/@ponder/utils",
+      "version": "0.3.0",
+      "integrity": "sha512-7FmIHAKG1mfHA9ptaqN0h9bfYRnqBGAFDfEgXsXS4rxAg513gVR8hGsp1AZon+OPUtIpNRrmhx7bsEk8auiqow==",
+      "source": "https://registry.npmjs.org/@ponder/utils/-/utils-0.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "source map": 2,
+        "duplicate TypeScript source": 10
+      }
+    },
+    {
+      "package": "node_modules/@repeaterjs/repeater",
+      "version": "3.1.0",
+      "integrity": "sha512-TaoVksZRSx2KWYYpyLQtMQXXeS98VsgZImzW65xmiVgbYhXLk+aEsmzPLirqVuE4/XuUapH2iMtxUzaBNDzdSQ==",
+      "source": "https://registry.npmjs.org/@repeaterjs/repeater/-/repeater-3.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 13,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 7,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "version": "1.2.14",
+      "integrity": "sha512-WxalXzgrLVpKC93xfpaJ3gCXUWzeCr+FRCbDVD2mUAy4L6Vo3lNVz0epUEUpxPWJkLNYUwM4OSIikv36OJ9mLg==",
+      "source": "https://registry.npmjs.org/@rolldown/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.2.14.tgz",
+      "license": "MIT",
+      "retainedFiles": 1,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 2
+      }
+    },
+    {
+      "package": "node_modules/@rolldown/pluginutils",
+      "version": "1.0.1",
+      "integrity": "sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==",
+      "source": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 4
+      }
+    },
+    {
+      "package": "node_modules/@scure/base",
+      "version": "1.2.6",
+      "integrity": "sha512-g/nm5FgUa//MCj1gV09zTJTaM6KBAHqLN907YVQqf7zC49+DcO4B1so4ZX07Ef10Twr6nuqYEH9GEggFXA4Fmg==",
+      "source": "https://registry.npmjs.org/@scure/base/-/base-1.2.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "source map": 4,
+        "duplicate TypeScript source": 1
+      }
+    },
+    {
+      "package": "node_modules/@scure/bip32",
+      "version": "1.7.0",
+      "integrity": "sha512-E4FFX/N3f4B80AKWp5dP6ow+flD1LQZo/w8UnLGYZO674jS6YnYeepycOOksv+vLPSpgN35wgKgy+ybfTb2SMw==",
+      "source": "https://registry.npmjs.org/@scure/bip32/-/bip32-1.7.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "source map": 4,
+        "duplicate TypeScript source": 1
+      }
+    },
+    {
+      "package": "node_modules/@scure/bip39",
+      "version": "1.6.0",
+      "integrity": "sha512-+lF0BbLiJNwVlev4eKelw1WWLaiKXw7sSl8T6FvBlWkdX+94aGJ4o8XjUdlyhTCjd8c+B3KT3JfS8P0bLRNU6A==",
+      "source": "https://registry.npmjs.org/@scure/bip39/-/bip39-1.6.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 27,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 21,
+        "duplicate TypeScript source": 1
+      }
+    },
+    {
+      "package": "node_modules/@types/node",
+      "version": "24.10.1",
+      "integrity": "sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==",
+      "source": "https://registry.npmjs.org/@types/node/-/node-24.10.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 75,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/@whatwg-node/disposablestack",
+      "version": "0.0.6",
+      "integrity": "sha512-LOtTn+JgJvX8WfBVJtF08TGrdjuFzGJc4mkP8EdDI8ADbvO7kiexYep1o8dwnt0okb0jYclCDXF13xU7Ge4zSw==",
+      "source": "https://registry.npmjs.org/@whatwg-node/disposablestack/-/disposablestack-0.0.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 26,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/@whatwg-node/events",
+      "version": "0.1.2",
+      "integrity": "sha512-ApcWxkrs1WmEMS2CaLLFUEem/49erT3sxIVjpzU5f6zmVcnijtDSrhoK2zVobOIikZJdH63jdAXOrvjf6eOUNQ==",
+      "source": "https://registry.npmjs.org/@whatwg-node/events/-/events-0.1.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/@whatwg-node/fetch",
+      "version": "0.10.13",
+      "integrity": "sha512-b4PhJ+zYj4357zwk4TTuF2nEe0vVtOrwdsrNo5hL+u1ojXNhh1FgJ6pg1jzDlwlT4oBdzfSwaBwMCtFCsIWg8Q==",
+      "source": "https://registry.npmjs.org/@whatwg-node/fetch/-/fetch-0.10.13.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/@whatwg-node/node-fetch",
+      "version": "0.8.6",
+      "integrity": "sha512-BDMdYFcerLQkwA2RTldxOqRCs6ZQD1S7UgP3pUdGUkcbgTrP/V5ko77ZkCww9DHmC4lpoYuwigGfQYj285gMvA==",
+      "source": "https://registry.npmjs.org/@whatwg-node/node-fetch/-/node-fetch-0.8.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 70,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 24
+      }
+    },
+    {
+      "package": "node_modules/@whatwg-node/promise-helpers",
+      "version": "1.3.2",
+      "integrity": "sha512-Nst5JdK47VIl9UcGwtv2Rcgyn5lWtZ0/mhRQ4G8NN2isxpq2TO30iqHzmwoJycjWuyUfg3GFXqP/gFHXeV57IA==",
+      "source": "https://registry.npmjs.org/@whatwg-node/promise-helpers/-/promise-helpers-1.3.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/@whatwg-node/server",
+      "version": "0.10.18",
+      "integrity": "sha512-kMwLlxUbduttIgaPdSkmEarFpP+mSY8FEm+QWMBRJwxOHWkri+cxd8KZHO9EMrB9vgUuz+5WEaCawaL5wGVoXg==",
+      "source": "https://registry.npmjs.org/@whatwg-node/server/-/server-0.10.18.tgz",
+      "license": "MIT",
+      "retainedFiles": 30,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 9
+      }
+    },
+    {
+      "package": "node_modules/abitype",
+      "version": "0.10.3",
+      "integrity": "sha512-tRN+7XIa7J9xugdbRzFv/95ka5ivR/sRe01eiWvM0HWWjHuigSZEACgKa0sj4wGuekTDtghCx+5Izk/cOi78pQ==",
+      "source": "https://registry.npmjs.org/abitype/-/abitype-0.10.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 63,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 47,
+        "source map": 102,
+        "duplicate TypeScript source": 34
+      }
+    },
+    {
+      "package": "node_modules/abort-controller",
+      "version": "3.0.0",
+      "integrity": "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==",
+      "source": "https://registry.npmjs.org/abort-controller/-/abort-controller-3.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 7,
+        "source map": 3
+      }
+    },
+    {
+      "package": "node_modules/ansi-escapes",
+      "version": "7.3.0",
+      "integrity": "sha512-BvU8nYgGQBxcmMuEeUEmNTvrMVjJNSH7RgW24vXexN4Ven6qCvy4TntnvlnwnMLTVlcRQQdbRY8NKnaIoeWDNg==",
+      "source": "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-7.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/ansi-regex",
+      "version": "6.4.0",
+      "integrity": "sha512-KzTVk2tCWAHtYrvvvaP8bJKJq2pVinhLcGEQdtLIYPbmNGNyYe8QwNaTUYQp2J7/vIsUKt5QCqAfUkYyG9DkOw==",
+      "source": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-6.4.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/ansi-styles",
+      "version": "6.2.3",
+      "integrity": "sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg==",
+      "source": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-6.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/atomic-sleep",
+      "version": "1.0.0",
+      "integrity": "sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==",
+      "source": "https://registry.npmjs.org/atomic-sleep/-/atomic-sleep-1.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/balanced-match",
+      "version": "1.0.2",
+      "integrity": "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==",
+      "source": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "upstream test/example": 1
+      }
+    },
+    {
+      "package": "node_modules/base64-js",
+      "version": "1.5.1",
+      "integrity": "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==",
+      "source": "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/bintrees",
+      "version": "1.0.2",
+      "integrity": "sha512-VOMgTMwjAaUG580SXn3LacVgjurrbMme7ZZNYGSSV7mmtY6QQRh0Eg3pwIcntQ77DErK1L0NxkbetjcoXzVwKw==",
+      "source": "https://registry.npmjs.org/bintrees/-/bintrees-1.0.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 10,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4,
+        "upstream test/example": 10
+      }
+    },
+    {
+      "package": "node_modules/brace-expansion",
+      "version": "2.1.7",
+      "integrity": "sha512-uZbew1NqdmPDTMJ8ah1y+b+9QEJrfkXFk3RcTQw3X0jW/xRUvFKsg1CfQdSYGdTbXZWExtU3J3ccxtnfw1Fi0g==",
+      "source": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.1.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "upstream test/example": 1
+      }
+    },
+    {
+      "package": "node_modules/buffer",
+      "version": "6.0.3",
+      "integrity": "sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==",
+      "source": "https://registry.npmjs.org/buffer/-/buffer-6.0.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/color-convert",
+      "version": "2.0.1",
+      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+      "source": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "upstream history": 1,
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/color-name",
+      "version": "1.1.4",
+      "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==",
+      "source": "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/commander",
+      "version": "12.1.0",
+      "integrity": "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==",
+      "source": "https://registry.npmjs.org/commander/-/commander-12.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 8
+      }
+    },
+    {
+      "package": "node_modules/copy-anything",
+      "version": "4.1.5",
+      "integrity": "sha512-vePst2VLTSqPglW7Q98VwFpGiGpOHTyXIo81MO5VyLecA5zMbZw/P/V1vmwD1jksa2iJpn/YkDrJ3XhTfzUyhQ==",
+      "source": "https://registry.npmjs.org/copy-anything/-/copy-anything-4.1.5.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/cross-inspect",
+      "version": "1.0.1",
+      "integrity": "sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==",
+      "source": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/cross-spawn",
+      "version": "7.0.6",
+      "integrity": "sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==",
+      "source": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6
+      }
+    },
+    {
+      "package": "node_modules/dataloader",
+      "version": "2.2.3",
+      "integrity": "sha512-y2krtASINtPFS1rSDjacrFgn1dcUuoREVabwlOGOe4SdxenREqwjwjElAdwvbGM7kgZz9a3KVicWR7vcz8rnzA==",
+      "source": "https://registry.npmjs.org/dataloader/-/dataloader-2.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/detect-libc",
+      "version": "2.1.2",
+      "integrity": "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==",
+      "source": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4
+      }
+    },
+    {
+      "package": "node_modules/dotenv",
+      "version": "16.6.1",
+      "integrity": "sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==",
+      "source": "https://registry.npmjs.org/dotenv/-/dotenv-16.6.1.tgz",
+      "license": "BSD-2-Clause",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/drizzle-orm",
+      "version": "0.41.0",
+      "integrity": "sha512-7A4ZxhHk9gdlXmTdPj/lREtP+3u8KvZ4yEN6MYVxBzZGex5Wtdc+CWSbu7btgF6TB0N+MNPrvW7RKBbxJchs/Q==",
+      "source": "https://registry.npmjs.org/drizzle-orm/-/drizzle-orm-0.41.0.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 993,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 769,
+        "source map": 880
+      }
+    },
+    {
+      "package": "node_modules/eastasianwidth",
+      "version": "0.2.0",
+      "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==",
+      "source": "https://registry.npmjs.org/eastasianwidth/-/eastasianwidth-0.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 2,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/emoji-regex",
+      "version": "9.2.2",
+      "integrity": "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==",
+      "source": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 9,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6
+      }
+    },
+    {
+      "package": "node_modules/environment",
+      "version": "1.1.0",
+      "integrity": "sha512-xUtoPkMggbz0MPyPiIWr1Kp4aeWJjDZ6SMvURhimjdZgsRuDplF5/s9hcgGhyXMhs+6vpnuoiZ2kFiu3FMnS8Q==",
+      "source": "https://registry.npmjs.org/environment/-/environment-1.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/event-target-shim",
+      "version": "5.0.1",
+      "integrity": "sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==",
+      "source": "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3,
+        "source map": 3
+      }
+    },
+    {
+      "package": "node_modules/eventemitter3",
+      "version": "5.0.1",
+      "integrity": "sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==",
+      "source": "https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6,
+        "source map": 2
+      }
+    },
+    {
+      "package": "node_modules/events",
+      "version": "3.3.0",
+      "integrity": "sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==",
+      "source": "https://registry.npmjs.org/events/-/events-3.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "upstream test/example": 24,
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/fast-redact",
+      "version": "3.5.0",
+      "integrity": "sha512-dwsoQlS7h9hMeYUq1W++23NDcBLV4KqONnITDV9DjfS3q1SgDGVrBdvvTLUotWtPSD7asWDV9/CmsZPy8Hf70A==",
+      "source": "https://registry.npmjs.org/fast-redact/-/fast-redact-3.5.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 11,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 8,
+        "upstream test/example": 3
+      }
+    },
+    {
+      "package": "node_modules/fdir",
+      "version": "6.5.0",
+      "integrity": "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==",
+      "source": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/foreground-child",
+      "version": "3.3.1",
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
+      "source": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+      "license": "ISC",
+      "retainedFiles": 13,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 8,
+        "source map": 16
+      }
+    },
+    {
+      "package": "node_modules/glob",
+      "version": "10.5.0",
+      "integrity": "sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==",
+      "source": "https://registry.npmjs.org/glob/-/glob-10.5.0.tgz",
+      "license": "ISC",
+      "retainedFiles": 20,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 15,
+        "source map": 30
+      }
+    },
+    {
+      "package": "node_modules/graphql",
+      "version": "16.8.2",
+      "integrity": "sha512-cvVIBILwuoSyD54U4cF/UXDh5yAobhNV/tPygI4lZhgOIJQE/WLWC4waBRb4I6bDVYb3OVx3lfHbaQOEoUD5sg==",
+      "source": "https://registry.npmjs.org/graphql/-/graphql-16.8.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 255,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 133
+      }
+    },
+    {
+      "package": "node_modules/graphql-yoga",
+      "version": "5.17.1",
+      "integrity": "sha512-Izb2uVWfdoWm+tF4bi39KE6F4uml3r700/EwULPZYOciY8inmy4hw+98c6agy3C+xceXvTkP7Li6mY/EI8XliA==",
+      "source": "https://registry.npmjs.org/graphql-yoga/-/graphql-yoga-5.17.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 120,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 40
+      }
+    },
+    {
+      "package": "node_modules/hono",
+      "version": "4.13.13",
+      "integrity": "sha512-CQ46U0ZkAGmbT/4UxdzzGJpacP2IeKgY4a5/tOI9AABbpOMfK739wfDXmv1usCk+3RkKj1hQy4/fjhiwa2xlrA==",
+      "source": "https://registry.npmjs.org/hono/-/hono-4.13.13.tgz",
+      "license": "MIT",
+      "retainedFiles": 229,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 345
+      }
+    },
+    {
+      "package": "node_modules/ieee754",
+      "version": "1.2.1",
+      "integrity": "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==",
+      "source": "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz",
+      "license": "BSD-3-Clause",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/is-fullwidth-code-point",
+      "version": "3.0.0",
+      "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==",
+      "source": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/isexe",
+      "version": "2.0.0",
+      "integrity": "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==",
+      "source": "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz",
+      "license": "ISC",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3,
+        "upstream test/example": 1
+      }
+    },
+    {
+      "package": "node_modules/isows",
+      "version": "1.0.7",
+      "integrity": "sha512-I1fSfDCZL5P0v33sVqeTDSpcstAg/N+wF5HS033mogOVIp4B+oHC7oOCsA3axAbBSGTJ8QubbNmnIRN/h8U7hg==",
+      "source": "https://registry.npmjs.org/isows/-/isows-1.0.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 8,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6,
+        "source map": 9,
+        "upstream history": 1,
+        "duplicate TypeScript source": 3
+      }
+    },
+    {
+      "package": "node_modules/jackspeak",
+      "version": "3.4.3",
+      "integrity": "sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==",
+      "source": "https://registry.npmjs.org/jackspeak/-/jackspeak-3.4.3.tgz",
+      "license": "BlueOak-1.0.0",
+      "retainedFiles": 9,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4,
+        "source map": 8
+      }
+    },
+    {
+      "package": "node_modules/js-tokens",
+      "version": "4.0.0",
+      "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+      "source": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/lightningcss",
+      "version": "1.33.0",
+      "integrity": "sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==",
+      "source": "https://registry.npmjs.org/lightningcss/-/lightningcss-1.33.0.tgz",
+      "license": "MPL-2.0",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 9
+      }
+    },
+    {
+      "package": "node_modules/lightningcss-linux-x64-gnu",
+      "version": "1.33.0",
+      "integrity": "sha512-ar+Ju7LmcN0Jo4FpL4hpFybwNG9/3A/Br5KW2n2jyODg3MEZXaDYADdemoNS+BDNfMgKvylJLj4S5tyRActuAg==",
+      "source": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.33.0.tgz",
+      "license": "MPL-2.0",
+      "retainedFiles": 2,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 2
+      }
+    },
+    {
+      "package": "node_modules/lru-cache",
+      "version": "10.4.3",
+      "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==",
+      "source": "https://registry.npmjs.org/lru-cache/-/lru-cache-10.4.3.tgz",
+      "license": "ISC",
+      "retainedFiles": 8,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3,
+        "source map": 6
+      }
+    },
+    {
+      "package": "node_modules/minimatch",
+      "version": "9.0.9",
+      "integrity": "sha512-OBwBN9AL4dqmETlpS2zasx+vTeWclWzkblfZk7KTA5j3jeOONz/tRCnZomUyvNg83wL5Zv9Ss6HMJXAgL8R2Yg==",
+      "source": "https://registry.npmjs.org/minimatch/-/minimatch-9.0.9.tgz",
+      "license": "ISC",
+      "retainedFiles": 17,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 12,
+        "source map": 24
+      }
+    },
+    {
+      "package": "node_modules/minipass",
+      "version": "7.1.3",
+      "integrity": "sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==",
+      "source": "https://registry.npmjs.org/minipass/-/minipass-7.1.3.tgz",
+      "license": "BlueOak-1.0.0",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2,
+        "source map": 4
+      }
+    },
+    {
+      "package": "node_modules/nanoid",
+      "version": "3.3.20",
+      "integrity": "sha512-uKdg2G3GNCKQn9byYOpxbGqrT2fGO5KRt5J/8b3pok8rT6qxGWF6hxMyJiEYtAf+FVyYuD9hRaDqX5uPFYJ4ZQ==",
+      "source": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.20.tgz",
+      "license": "MIT",
+      "retainedFiles": 11,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 15
+      }
+    },
+    {
+      "package": "node_modules/obuf",
+      "version": "1.1.2",
+      "integrity": "sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==",
+      "source": "https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "upstream test/example": 1
+      }
+    },
+    {
+      "package": "node_modules/on-exit-leak-free",
+      "version": "2.1.2",
+      "integrity": "sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==",
+      "source": "https://registry.npmjs.org/on-exit-leak-free/-/on-exit-leak-free-2.1.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "upstream test/example": 8
+      }
+    },
+    {
+      "package": "node_modules/ox",
+      "version": "0.14.56",
+      "integrity": "sha512-Feinlj+deWEam6RIwurRE+eHZ2N3hoUb3AAjQ10BmxRCYIymfqNkv0eZ+4ln4GkgDmSGLD2rGtTMqsFYSVDC6w==",
+      "source": "https://registry.npmjs.org/ox/-/ox-0.14.56.tgz",
+      "license": "MIT",
+      "retainedFiles": 394,
+      "excludedFilesByReason": {
+        "CommonJS duplicate; application uses ESM": 165,
+        "outside tested application runtime module graph": 75,
+        "blob-transaction KZG data not used by read-only rental backend": 8,
+        "source map": 495,
+        "upstream history": 1,
+        "duplicate TypeScript source": 194
+      }
+    },
+    {
+      "package": "node_modules/ox/node_modules/abitype",
+      "version": "1.3.0",
+      "integrity": "sha512-fk6Te+bojIFrMvMZrnOO+SxCB+RUksTGOzq/60ZRvs1L+BVzvi2bqt9L3W/17ZLdZsyM1FuYf65P5nlmoiH1Bg==",
+      "source": "https://registry.npmjs.org/abitype/-/abitype-1.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 64,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 48,
+        "source map": 105,
+        "duplicate TypeScript source": 35
+      }
+    },
+    {
+      "package": "node_modules/package-json-from-dist",
+      "version": "1.0.1",
+      "integrity": "sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==",
+      "source": "https://registry.npmjs.org/package-json-from-dist/-/package-json-from-dist-1.0.1.tgz",
+      "license": "BlueOak-1.0.0",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2,
+        "source map": 4
+      }
+    },
+    {
+      "package": "node_modules/path-key",
+      "version": "3.1.1",
+      "integrity": "sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==",
+      "source": "https://registry.npmjs.org/path-key/-/path-key-3.1.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/path-scurry",
+      "version": "1.11.1",
+      "integrity": "sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==",
+      "source": "https://registry.npmjs.org/path-scurry/-/path-scurry-1.11.1.tgz",
+      "license": "BlueOak-1.0.0",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2,
+        "source map": 4
+      }
+    },
+    {
+      "package": "node_modules/pg",
+      "version": "8.23.1",
+      "integrity": "sha512-aL96AHANtWjPLDOLqnhx+ngp9+UK7ETEU8VJrDCGvsSSi/mGLcWYsS6Herg7lmaBJe4uwrfqsa7gTEFaSizDoQ==",
+      "source": "https://registry.npmjs.org/pg/-/pg-8.23.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 19,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/pg-cloudflare",
+      "version": "1.4.1",
+      "integrity": "sha512-6PQbsFWZcp9EmJEwy5cGQ2La+AMWpP46lgbb8X+U/XsHIUweYDNCpeuKck5RxL2MdVFi7krbbEi5nX4Zh7JhrQ==",
+      "source": "https://registry.npmjs.org/pg-cloudflare/-/pg-cloudflare-1.4.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3,
+        "source map": 2,
+        "duplicate TypeScript source": 2
+      }
+    },
+    {
+      "package": "node_modules/pg-connection-string",
+      "version": "2.14.1",
+      "integrity": "sha512-qR3kGNPBLpCNtz0evbKA0Y/MRFXwSSdT+pTJvYp/bXTcReZbvX1kzF0IyTc1QnxqF7AZbOeBhNL8R5mYQZV/MA==",
+      "source": "https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.14.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/pg-copy-streams",
+      "version": "6.0.6",
+      "integrity": "sha512-Z+Dd2C2NIDTsjyFKmc6a9QLlpM8tjpERx+43RSx0WmL7j3uNChERi3xSvZUL0hWJ1oRUn4S3fhyt3apdSrTyKQ==",
+      "source": "https://registry.npmjs.org/pg-copy-streams/-/pg-copy-streams-6.0.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 8,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/pg-int8",
+      "version": "1.0.1",
+      "integrity": "sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==",
+      "source": "https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz",
+      "license": "ISC",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/pg-pool",
+      "version": "3.14.0",
+      "integrity": "sha512-gKtPkFdQPU3DksooVLi9LsjZxrsBUZIpa+7aVx+LV5pNh0KzP4Zleud2po+ConrxbuXGBJ6Hfer6hdgpIBpBaw==",
+      "source": "https://registry.npmjs.org/pg-pool/-/pg-pool-3.14.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/pg-protocol",
+      "version": "1.16.1",
+      "integrity": "sha512-p9VOFMiHB/ZbJATetbg+99PxssTVSQRnyuPSQ67mN1+1KBOjZaZ83ZQzltnxPhJwSsC3nwVjJ10DVJlerbFzLg==",
+      "source": "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.16.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 18,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4,
+        "source map": 9,
+        "duplicate TypeScript source": 11
+      }
+    },
+    {
+      "package": "node_modules/pg-query-emscripten",
+      "version": "5.1.0",
+      "integrity": "sha512-H1ZWOzLRddmHuE4GZqFjjo55hA9zMiePz/WDDGANA/EnvILCJps9pcRucyGd+MFvapeYOy6TWSYz6DbtBOaxRQ==",
+      "source": "https://registry.npmjs.org/pg-query-emscripten/-/pg-query-emscripten-5.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/pg-types",
+      "version": "2.2.0",
+      "integrity": "sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==",
+      "source": "https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 10,
+      "excludedFilesByReason": {
+        "duplicate TypeScript source": 1,
+        "upstream test/example": 2
+      }
+    },
+    {
+      "package": "node_modules/pgpass",
+      "version": "1.0.5",
+      "integrity": "sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==",
+      "source": "https://registry.npmjs.org/pgpass/-/pgpass-1.0.5.tgz",
+      "license": "MIT",
+      "retainedFiles": 2,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/picocolors",
+      "version": "1.1.1",
+      "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==",
+      "source": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+      "license": "ISC",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/picomatch",
+      "version": "4.0.7",
+      "integrity": "sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==",
+      "source": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 7
+      }
+    },
+    {
+      "package": "node_modules/pino",
+      "version": "8.21.0",
+      "integrity": "sha512-ip4qdzjkAyDDZklUaZkcRFb2iA118H9SgRh8yzTkSQK8HilsOJF7rSY8HoW5+I0M46AZgX/pxbprf2vvzQCE0Q==",
+      "source": "https://registry.npmjs.org/pino/-/pino-8.21.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 50,
+      "excludedFilesByReason": {
+        "upstream test/example": 137,
+        "outside tested application runtime module graph": 8
+      }
+    },
+    {
+      "package": "node_modules/pino-abstract-transport",
+      "version": "1.2.0",
+      "integrity": "sha512-Guhh8EZfPCfH+PMXAb6rKOjGQEoy0xlAIn+irODG5kgfYV+BQ0rGYYWTIel3P5mmyXqkYkPmdIkywsn6QKUR1Q==",
+      "source": "https://registry.npmjs.org/pino-abstract-transport/-/pino-abstract-transport-1.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "upstream test/example": 9,
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/pino-std-serializers",
+      "version": "6.2.2",
+      "integrity": "sha512-cHjPPsE+vhj/tnhCy/wiMh3M3z3h/j15zHQX+S9GkTBgqJuTuJzYJ4gUyACLhDaJ7kk9ba9iRDmbH2tJU03OiA==",
+      "source": "https://registry.npmjs.org/pino-std-serializers/-/pino-std-serializers-6.2.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 15,
+      "excludedFilesByReason": {
+        "upstream test/example": 7
+      }
+    },
+    {
+      "package": "node_modules/ponder",
+      "version": "0.18.2",
+      "integrity": "sha512-zo+ZDrhJuVj5wEHcUsJC6qsrZxzf/c+jWW2WP1sBtZbLJPgT2pykCeIZJmGC1TiqPOuZM096TVMd2kw+IfEKNA==",
+      "source": "https://registry.npmjs.org/ponder/-/ponder-0.18.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 370,
+      "excludedFilesByReason": {
+        "source map": 242,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/postcss",
+      "version": "8.5.30",
+      "integrity": "sha512-zkd+e9S1AQHhmaBKye9zlFHWjOwVgqXl1q3ECYy8561K7qxR2cREf/STLskulBFd78k6AOFeA+ff1TtEzk9bAA==",
+      "source": "https://registry.npmjs.org/postcss/-/postcss-8.5.30.tgz",
+      "license": "MIT",
+      "retainedFiles": 26,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 29
+      }
+    },
+    {
+      "package": "node_modules/postgres-array",
+      "version": "2.0.0",
+      "integrity": "sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==",
+      "source": "https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/postgres-bytea",
+      "version": "1.0.1",
+      "integrity": "sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==",
+      "source": "https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/postgres-date",
+      "version": "1.0.7",
+      "integrity": "sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==",
+      "source": "https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/postgres-interval",
+      "version": "1.2.0",
+      "integrity": "sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==",
+      "source": "https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/prettier",
+      "version": "3.6.2",
+      "integrity": "sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==",
+      "source": "https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 27,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 29
+      }
+    },
+    {
+      "package": "node_modules/process",
+      "version": "0.11.10",
+      "integrity": "sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==",
+      "source": "https://registry.npmjs.org/process/-/process-0.11.10.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/process-warning",
+      "version": "3.0.0",
+      "integrity": "sha512-mqn0kFRl0EoqhnL0GQ0veqFHyIN1yig9RHh/InzORTUiZHFRAur+aMtRkELNwGs9aNwKS6tg/An4NYBPGwvtzQ==",
+      "source": "https://registry.npmjs.org/process-warning/-/process-warning-3.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 6,
+      "excludedFilesByReason": {
+        "upstream test/example": 13,
+        "outside tested application runtime module graph": 1,
+        "duplicate TypeScript source": 1
+      }
+    },
+    {
+      "package": "node_modules/prom-client",
+      "version": "15.1.3",
+      "integrity": "sha512-6ZiOBfCywsD4k1BN9IX0uZhF+tJkV8q8llP64G5Hajs4JOeVLPCwpPVcpXy3BwYiUGgyJzsJJQeOIv7+hDSq8g==",
+      "source": "https://registry.npmjs.org/prom-client/-/prom-client-15.1.3.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 36,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/quick-format-unescaped",
+      "version": "4.0.4",
+      "integrity": "sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==",
+      "source": "https://registry.npmjs.org/quick-format-unescaped/-/quick-format-unescaped-4.0.4.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "upstream test/example": 2
+      }
+    },
+    {
+      "package": "node_modules/readable-stream",
+      "version": "4.8.0",
+      "integrity": "sha512-2jhTTU3Eilp/2DMT71gbcoqC35eQHasMJH0RHkYxwlxIv3+FR6Y5xAFZIwEGLxKkjZYEFlsiMNIdwUqjK2lLHQ==",
+      "source": "https://registry.npmjs.org/readable-stream/-/readable-stream-4.8.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 33
+      }
+    },
+    {
+      "package": "node_modules/real-require",
+      "version": "0.2.0",
+      "integrity": "sha512-57frrGM/OCTLqLOAh0mhVA9VBMHd+9U7Zb2THMGdBUoZVOtGbJzjxsYGDJ3A9AYYCP4hn6y1TVbaOfzWtm5GFg==",
+      "source": "https://registry.npmjs.org/real-require/-/real-require-0.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/rolldown",
+      "version": "1.2.14",
+      "integrity": "sha512-eTBTTqMR6uHKLgcUqpJP8ntzDI6V4LYA8negAMBEI7gkgVvOdrx6VsvS2Ym+83KhOPdLCHWJu0w7UQFJZhHKNw==",
+      "source": "https://registry.npmjs.org/rolldown/-/rolldown-1.2.14.tgz",
+      "license": "MIT",
+      "retainedFiles": 22,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 30
+      }
+    },
+    {
+      "package": "node_modules/safe-buffer",
+      "version": "5.2.1",
+      "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==",
+      "source": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/safe-stable-stringify",
+      "version": "2.5.0",
+      "integrity": "sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==",
+      "source": "https://registry.npmjs.org/safe-stable-stringify/-/safe-stable-stringify-2.5.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/semver",
+      "version": "7.8.5",
+      "integrity": "sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==",
+      "source": "https://registry.npmjs.org/semver/-/semver-7.8.5.tgz",
+      "license": "ISC",
+      "retainedFiles": 50,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/shebang-command",
+      "version": "2.0.0",
+      "integrity": "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==",
+      "source": "https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/shebang-regex",
+      "version": "3.0.0",
+      "integrity": "sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==",
+      "source": "https://registry.npmjs.org/shebang-regex/-/shebang-regex-3.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/signal-exit",
+      "version": "4.1.0",
+      "integrity": "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==",
+      "source": "https://registry.npmjs.org/signal-exit/-/signal-exit-4.1.0.tgz",
+      "license": "ISC",
+      "retainedFiles": 11,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6,
+        "source map": 12
+      }
+    },
+    {
+      "package": "node_modules/sonic-boom",
+      "version": "3.8.1",
+      "integrity": "sha512-y4Z8LCDBuum+PBP3lSV7RHrXscqksve/bi0as7mhwVnBW+/wUqKT/2Kb7um8yqcFy0duYbbPxzt89Zy2nOCaxg==",
+      "source": "https://registry.npmjs.org/sonic-boom/-/sonic-boom-3.8.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 8,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4,
+        "upstream test/example": 13
+      }
+    },
+    {
+      "package": "node_modules/source-map-js",
+      "version": "1.2.2",
+      "integrity": "sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==",
+      "source": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.2.tgz",
+      "license": "BSD-3-Clause",
+      "retainedFiles": 7,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 11
+      }
+    },
+    {
+      "package": "node_modules/split2",
+      "version": "4.2.0",
+      "integrity": "sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==",
+      "source": "https://registry.npmjs.org/split2/-/split2-4.2.0.tgz",
+      "license": "ISC",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/stacktrace-parser",
+      "version": "0.1.11",
+      "integrity": "sha512-WjlahMgHmCJpqzU8bIBy4qtsZdU9lRlcZE3Lvyej6t4tuOuv1vk57OW3MBrj6hXBFx/nNoC9MPMTcr5YA7NQbg==",
+      "source": "https://registry.npmjs.org/stacktrace-parser/-/stacktrace-parser-0.1.11.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/string-width",
+      "version": "5.1.2",
+      "integrity": "sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==",
+      "source": "https://registry.npmjs.org/string-width/-/string-width-5.1.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/string-width-cjs",
+      "version": "4.2.3",
+      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",
+      "source": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/string-width-cjs/node_modules/ansi-regex",
+      "version": "5.0.1",
+      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
+      "source": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/string-width-cjs/node_modules/emoji-regex",
+      "version": "8.0.0",
+      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",
+      "source": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4
+      }
+    },
+    {
+      "package": "node_modules/string-width-cjs/node_modules/strip-ansi",
+      "version": "6.0.1",
+      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
+      "source": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/string_decoder",
+      "version": "1.3.0",
+      "integrity": "sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==",
+      "source": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/strip-ansi",
+      "version": "7.2.0",
+      "integrity": "sha512-yDPMNjp4WyfYBkHnjIRLfca1i6KMyGCtsVgoKe/z1+6vukgaENdgGBZt+ZmKPc4gavvEZ5OgHfHdrazhgNyG7w==",
+      "source": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-7.2.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/strip-ansi-cjs",
+      "version": "6.0.1",
+      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
+      "source": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/strip-ansi-cjs/node_modules/ansi-regex",
+      "version": "5.0.1",
+      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
+      "source": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/superjson",
+      "version": "2.2.6",
+      "integrity": "sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==",
+      "source": "https://registry.npmjs.org/superjson/-/superjson-2.2.6.tgz",
+      "license": "MIT",
+      "retainedFiles": 26,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "source map": 12
+      }
+    },
+    {
+      "package": "node_modules/tdigest",
+      "version": "0.1.3",
+      "integrity": "sha512-zbRt+lT+/H4fRItHshczHErVCQnitJk8MfMT24MqFJf3YL7SJJPqGIGeuOdvxXxM/AHFzKBl7WoyaYwqO9s3Kw==",
+      "source": "https://registry.npmjs.org/tdigest/-/tdigest-0.1.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 6
+      }
+    },
+    {
+      "package": "node_modules/terminal-size",
+      "version": "4.0.1",
+      "integrity": "sha512-avMLDQpUI9I5XFrklECw1ZEUPJhqzcwSWsyyI8blhRLT+8N1jLJWLWWYQpB2q2xthq8xDvjZPISVh53T/+CLYQ==",
+      "source": "https://registry.npmjs.org/terminal-size/-/terminal-size-4.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/thread-stream",
+      "version": "2.7.0",
+      "integrity": "sha512-qQiRWsU/wvNolI6tbbCKd9iKaTnCXsTwVxhhKM6nctPdujTyztjlbUkUTUymidWcMnZ5pWR0ej4a0tjsW021vw==",
+      "source": "https://registry.npmjs.org/thread-stream/-/thread-stream-2.7.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 10,
+      "excludedFilesByReason": {
+        "upstream test/example": 44,
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/tinyglobby",
+      "version": "0.2.17",
+      "integrity": "sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==",
+      "source": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/tslib",
+      "version": "2.8.1",
+      "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==",
+      "source": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz",
+      "license": "0BSD",
+      "retainedFiles": 11,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 3
+      }
+    },
+    {
+      "package": "node_modules/type-fest",
+      "version": "0.7.1",
+      "integrity": "sha512-Ne2YiiGN8bmrmJJEuTWTLJR32nh/JdL1+PSicowtNb0WFpn59GK8/lfD61bVtzguz7b3PBt74nxpv/Pw5po5Rg==",
+      "source": "https://registry.npmjs.org/type-fest/-/type-fest-0.7.1.tgz",
+      "license": "(MIT OR CC0-1.0)",
+      "retainedFiles": 15,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/typescript",
+      "version": "5.9.3",
+      "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+      "source": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+      "license": "Apache-2.0",
+      "retainedFiles": 108,
+      "excludedFilesByReason": {
+        "unused compiler API/server/localization": 24
+      }
+    },
+    {
+      "package": "node_modules/undici-types",
+      "version": "7.16.0",
+      "integrity": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==",
+      "source": "https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 45,
+      "excludedFilesByReason": {}
+    },
+    {
+      "package": "node_modules/urlpattern-polyfill",
+      "version": "10.1.0",
+      "integrity": "sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==",
+      "source": "https://registry.npmjs.org/urlpattern-polyfill/-/urlpattern-polyfill-10.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4
+      }
+    },
+    {
+      "package": "node_modules/viem",
+      "version": "2.57.7",
+      "integrity": "sha512-x3UqqrcQuESaRVK6a0BvNmoNP0SVhu913uxEAxYLJx1lNYnj6ylTntfUdakCUKjk1+T+63gkdwFGJQ2O5C/nRw==",
+      "source": "https://registry.npmjs.org/viem/-/viem-2.57.7.tgz",
+      "license": "MIT",
+      "retainedFiles": 2611,
+      "excludedFilesByReason": {
+        "CommonJS duplicate; application uses ESM": 1439,
+        "outside tested application runtime module graph": 362,
+        "upstream test/example": 60,
+        "blob-transaction KZG data not used by read-only rental backend": 2,
+        "source map": 4409,
+        "upstream history": 1,
+        "duplicate TypeScript source": 1440
+      }
+    },
+    {
+      "package": "node_modules/viem/node_modules/abitype",
+      "version": "1.2.3",
+      "integrity": "sha512-Ofer5QUnuUdTFsBRwARMoWKOH1ND5ehwYhJ3OJ/BQO+StkwQjHw0XyVh4vDttzHB7QOFhPHa/o413PJ82gU/Tg==",
+      "source": "https://registry.npmjs.org/abitype/-/abitype-1.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 64,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 48,
+        "source map": 105,
+        "duplicate TypeScript source": 35
+      }
+    },
+    {
+      "package": "node_modules/viem/node_modules/ws",
+      "version": "8.21.0",
+      "integrity": "sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==",
+      "source": "https://registry.npmjs.org/ws/-/ws-8.21.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 16
+      }
+    },
+    {
+      "package": "node_modules/vite",
+      "version": "8.3.1",
+      "integrity": "sha512-/bvH9E9tmCXRGp2uXY3WbOldqpTwFkbha/8ANaEQ6VkxhH60KyqLwgZq6lG2y+4uT55x9+9eUHMpQ7uGnOCKjA==",
+      "source": "https://registry.npmjs.org/vite/-/vite-8.3.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 20,
+      "excludedFilesByReason": {
+        "browser build toolchain; application TypeScript uses Node 24": 17
+      }
+    },
+    {
+      "package": "node_modules/which",
+      "version": "2.0.2",
+      "integrity": "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==",
+      "source": "https://registry.npmjs.org/which/-/which-2.0.2.tgz",
+      "license": "ISC",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1,
+        "upstream history": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi",
+      "version": "8.1.0",
+      "integrity": "sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==",
+      "source": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-8.1.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs",
+      "version": "7.0.0",
+      "integrity": "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==",
+      "source": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 3,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs/node_modules/ansi-regex",
+      "version": "5.0.1",
+      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
+      "source": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs/node_modules/ansi-styles",
+      "version": "4.3.0",
+      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",
+      "source": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs/node_modules/emoji-regex",
+      "version": "8.0.0",
+      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",
+      "source": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 4
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs/node_modules/string-width",
+      "version": "4.2.3",
+      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",
+      "source": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/wrap-ansi-cjs/node_modules/strip-ansi",
+      "version": "6.0.1",
+      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
+      "source": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",
+      "license": "MIT",
+      "retainedFiles": 4,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 1
+      }
+    },
+    {
+      "package": "node_modules/ws",
+      "version": "8.22.0",
+      "integrity": "sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==",
+      "source": "https://registry.npmjs.org/ws/-/ws-8.22.0.tgz",
+      "license": "MIT",
+      "retainedFiles": 17,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    },
+    {
+      "package": "node_modules/xtend",
+      "version": "4.0.2",
+      "integrity": "sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==",
+      "source": "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz",
+      "license": "MIT",
+      "retainedFiles": 5,
+      "excludedFilesByReason": {
+        "outside tested application runtime module graph": 2
+      }
+    }
+  ],
+  "notCachedPlatformOptionalPackages": [
+    {
+      "package": "node_modules/@rolldown/binding-android-arm-eabi",
+      "version": "1.2.14",
+      "os": [
+        "android"
+      ],
+      "cpu": [
+        "arm"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-android-arm64",
+      "version": "1.2.14",
+      "os": [
+        "android"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-darwin-arm64",
+      "version": "1.2.14",
+      "os": [
+        "darwin"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-darwin-x64",
+      "version": "1.2.14",
+      "os": [
+        "darwin"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-freebsd-x64",
+      "version": "1.2.14",
+      "os": [
+        "freebsd"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": [
+        "glibc"
+      ]
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": [
+        "musl"
+      ]
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "ppc64"
+      ],
+      "libc": [
+        "glibc"
+      ]
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "s390x"
+      ],
+      "libc": [
+        "glibc"
+      ]
+    },
+    {
+      "package": "node_modules/@rolldown/binding-linux-x64-musl",
+      "version": "1.2.14",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": [
+        "musl"
+      ]
+    },
+    {
+      "package": "node_modules/@rolldown/binding-openharmony-arm64",
+      "version": "1.2.14",
+      "os": [
+        "openharmony"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "version": "1.2.14",
+      "os": [
+        "win32"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "version": "1.2.14",
+      "os": [
+        "win32"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/fsevents",
+      "version": "2.3.3",
+      "os": [
+        "darwin"
+      ],
+      "cpu": null,
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-android-arm64",
+      "version": "1.33.0",
+      "os": [
+        "android"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-darwin-arm64",
+      "version": "1.33.0",
+      "os": [
+        "darwin"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-darwin-x64",
+      "version": "1.33.0",
+      "os": [
+        "darwin"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-freebsd-x64",
+      "version": "1.33.0",
+      "os": [
+        "freebsd"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-linux-arm-gnueabihf",
+      "version": "1.33.0",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-linux-arm64-gnu",
+      "version": "1.33.0",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": [
+        "glibc"
+      ]
+    },
+    {
+      "package": "node_modules/lightningcss-linux-arm64-musl",
+      "version": "1.33.0",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": [
+        "musl"
+      ]
+    },
+    {
+      "package": "node_modules/lightningcss-linux-x64-musl",
+      "version": "1.33.0",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": [
+        "musl"
+      ]
+    },
+    {
+      "package": "node_modules/lightningcss-win32-arm64-msvc",
+      "version": "1.33.0",
+      "os": [
+        "win32"
+      ],
+      "cpu": [
+        "arm64"
+      ],
+      "libc": null
+    },
+    {
+      "package": "node_modules/lightningcss-win32-x64-msvc",
+      "version": "1.33.0",
+      "os": [
+        "win32"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "libc": null
+    }
+  ],
+  "retainedFileCount": 8860,
+  "archiveSha256": "de8915b5583fd34c9bde833de777d1a39c6a2a9739aecd8a8ec7a669de64e88a",
+  "archiveBytes": 7542204
+}

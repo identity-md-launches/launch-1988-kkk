@@ -1,0 +1,24 @@
+Observed unchanged Ponder 0.18.2 modules, compact Node 24 bootstrap; dev database mode.
+17:40:35.918 INFO  Created database tables count=2 tables=["history","projection"] (28ms)
+17:40:35.972 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:40:44.417 WARN  Dropped existing database tables count=2 tables=["history","projection"] (131ms)
+17:40:44.452 INFO  Created database tables count=2 tables=["history","projection"] (35ms)
+17:40:44.509 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:40:58.520 WARN  Dropped existing database tables count=2 tables=["history","projection"] (61ms)
+17:40:58.554 INFO  Created database tables count=2 tables=["history","projection"] (32ms)
+17:40:58.614 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:41:01.483 WARN  Dropped existing database tables count=2 tables=["history","projection"] (21ms)
+17:41:01.521 INFO  Created database tables count=2 tables=["history","projection"] (37ms)
+17:41:01.585 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:41:14.633 INFO  Reorged block chain=anvil number=102 (29ms)
+17:41:18.509 INFO  Created database tables count=2 tables=["history","projection"] (24ms)
+17:41:18.564 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:41:32.703 WARN  Dropped existing database tables count=2 tables=["history","projection"] (81ms)
+17:41:32.745 INFO  Created database tables count=2 tables=["history","projection"] (40ms)
+17:41:32.805 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:41:48.545 WARN  Dropped existing database tables count=2 tables=["history","projection"] (93ms)
+17:41:48.579 INFO  Created database tables count=2 tables=["history","projection"] (33ms)
+17:41:48.636 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics
+17:42:04.522 WARN  Dropped existing database tables count=2 tables=["history","projection"] (124ms)
+17:42:04.563 INFO  Created database tables count=2 tables=["history","projection"] (39ms)
+17:42:04.625 INFO  Compact local Ponder runtime; restart after source edits; dev projection rebuild semantics

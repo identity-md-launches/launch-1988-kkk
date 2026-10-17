@@ -1,0 +1,3 @@
+Actual compact offline demo output (restart,reconcile,quit):
+Restarted with the SAME database; projection rebuilt.
+{"ok":true,"blockNumber":"110","blockHash":"0xc2b4c40ead5e06ed2b1e71785f0a8708c2480304f36062d15401d5b0ed269d69","tokenBalance":"80000123","liabilities":"80000000","surplus":"123"}

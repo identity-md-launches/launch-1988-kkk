@@ -307,3 +307,23 @@ These are source changes to a non-upgradeable escrow, not an upgrade of any depl
 No existing chain state or historical pre-change withdrawals are imported into this mapping.
 This iteration performs only local tests and an Anvil demo; it changes no public deployment.
 Constructor parameters and the payment token are unchanged.
+
+## Read-only local indexer (this trial)
+
+[`indexer/README.md`](../indexer/README.md) documents the implemented event consumer,
+query endpoints and same-block reconciliation. Its backend never signs, submits transactions,
+expires reservations, or pays refunds. The maintenance/intent-writing suggestions earlier
+in this guide are responsibilities of a separate transaction-capable application; they are
+**not** part of this read-only backend. Only its isolated synthetic Anvil test harness transacts.
+
+Use the application `/sync` status and the status envelope on every domain response. Ponder's
+built-in `/health`, `/ready`, and `/status` are framework diagnostics and do not establish
+RPC connectivity or current canonical state. Latest domain state is provisional. The tested
+rollback window is 120 seconds of chain timestamps, not 120 confirmations. No production
+finality, remote RPC, PostgreSQL deployment or hosting is validated here.
+
+The offline distribution uses the application's compact Node 24 bootstrap with original
+Ponder 0.18.2 modules. Its dev database mode rebuilds projections on restart while retaining
+the same PGlite directory; it does not incrementally resume projections or hot-reload edits.
+Restart after changing source. The bootstrap depends on private Ponder interfaces, so upgrades
+and new imports require rebuilding the scoped dependency bundle and rerunning acceptance tests.

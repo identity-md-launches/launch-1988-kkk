@@ -1,0 +1,255 @@
+RENTAL READ-ONLY BACKEND TRIAL — LOCAL IMPLEMENTATION AND BUNDLE REPAIR
+Date: 2026-10-17
+
+Result
+------
+PASS: the local backend and real Anvil acceptance A-F work from a fresh offline
+installation of the repaired archive. The original 40,050,000-byte dependency cache
+caused the reported 8 MiB submission failure. It has been replaced by a reproducible
+7,542,204-byte application runtime. The old archive/checksum are removed.
+The contracts, Foundry tests, build configuration, remappings, existing dependencies,
+indexer/package.json and indexer/package-lock.json are unchanged by this repair.
+
+Important qualification: the compact runtime uses original Ponder 0.18.2 modules
+through a version-specific Node 24 bootstrap. It is NOT the upstream ponder dev CLI.
+It uses Ponder's dev database mode and rebuilds projections on restart in the SAME
+persistent database directory. There is no hot reload or incremental projection
+resume. Restart after source edits. Private Ponder interfaces require review and
+full acceptance tests before upgrading. This limitation is documented, not hidden.
+Production PostgreSQL, external hosting and public-chain operation are not validated.
+
+Assignment capabilities and scope
+--------------------------------
+Read the pinned project history, eth-security adapter/reference/licence, existing
+contracts, ABI, integration guide and backend implementation. Used only this public
+rental project and synthetic Anvil data. The worker permits source changes under
+indexer/ and unrestricted test scaffolding in test/scratch/. All installed node_modules,
+service databases and generated dependency experiments were kept under test/scratch/;
+the submitted archive is an ordinary file, not an installed dependency tree/submodule.
+No root build/dependency/configuration file, existing Solidity test, contract or
+.github file was changed. No actual .env, account, credential, or unrelated repository
+was accessed.
+No private repository, public deployment, public server, tunnel, cloud/paid service,
+IMD configuration change, extra job or deployment skill was used.
+
+Bare forge was absent from PATH; the supplied Foundry 1.8.3 executable worked when
+invoked through its provided installation path. This is a worker-shell PATH issue,
+not a platform-wide restriction. No requester input or credentials were needed.
+The 8 MiB source-delivery constraint is this assignment's constraint; it does not
+establish any general platform inability to run backend code.
+
+Runtime and packaging
+---------------------
+Tested: Node 24.21.0, npm 11.19.0, GNU tar 1.34, xz 5.2.5, Python 3.10.12 (maintainer
+packaging only), Foundry 1.8.3, Solidity 0.8.26+commit.8a97fa7a.
+Unchanged pinned packages: Ponder 0.18.2, PGlite 0.2.13, viem 2.57.7, Hono 4.13.13,
+TypeScript 5.9.3, Prettier 3.6.2. Offline target validated: Linux x64/glibc.
+
+The generator validates original registry tarball SHA-512 hashes from the protected
+lockfile. It retains 8,860 byte-identical files, including runtime code, declarations,
+licences/notices, package metadata and PostgreSQL WASM/data. It records 176 cached
+package entries and 25 absent optional platform entries. The reviewed module selection
+contains 2,716 modules observed during real application/tool runs. The original npm
+cache is only a maintainer input; it is not required to install or run this delivery.
+
+The compact installer uses Node, tar and xz, invokes no npm/network/lifecycle scripts,
+and checks package/lock/selection hashes, the archive checksum, regular-file-only paths,
+and each extracted file hash. It refuses an existing node_modules directory. It stores
+the complete per-file hash/exclusion inventory in .data/runtime-inventory.json.
+The archive and manifests were regenerated twice and compared byte for byte: identical.
+Archive SHA-256:
+  de8915b5583fd34c9bde833de777d1a39c6a2a9739aecd8a8ec7a669de64e88a
+
+This is an application-scoped runtime, not a general npm installation. Unused upstream
+tests/examples, maps, duplicate builds, compiler server/localizations, optional database
+extensions, unused blob-transaction data, unrelated modules and browser-build binaries
+are excluded with explicit reasons. Nothing required by the documented application
+commands was omitted. Direct upstream CLI, arbitrary Vite plugins, unrelated package
+APIs and alternative formatter languages are outside this compact distribution.
+New application imports require regenerating the selection and rerunning the checks.
+
+scripts/runtime.mjs uses Node's TypeScript loader and Ponder's own virtual-module
+factory. Original Ponder validators, schema generation, PGlite persistence, sync engine,
+canonical event processing, rollback and HTTP server run unchanged. The runner accepts
+only this PGlite/multichain configuration and exactly Ponder 0.18.2/Node 24. The loopback
+port is explicitly taken from application configuration, not an inherited PORT value.
+
+Commands actually run in the repair
+-----------------------------------
+Working directory: repository root, unless a prefix is shown. Foundry executables
+were selected from their provided installation; no installation/config was modified.
+  node --version
+  npm --version
+  tar --version
+  xz --version
+  python3 --version
+  forge --version
+  forge build
+  forge fmt --check
+  FOUNDRY_FUZZ_SEED=0xc6b413a08f5d387af6fe6349ea383bd6478498761e5e040031705165958de293 forge test
+
+Packaging and fresh offline installation:
+  node --no-use-env-proxy indexer/scripts/vendor-cache.mjs test/scratch/bundle-repair/original
+    (run twice; archive, manifest and checksum compared byte for byte)
+  node --no-use-env-proxy test/scratch/bundle-repair/offline/scripts/install.mjs
+  node --no-use-env-proxy --test test/scratch/bundle-repair/offline/tests/install.test.mjs
+  npm --prefix test/scratch/bundle-repair/offline run abi:check
+  npm --prefix test/scratch/bundle-repair/offline run typecheck
+  npm --prefix test/scratch/bundle-repair/offline test
+  npm --prefix test/scratch/bundle-repair/offline run format:check
+
+Live checks (ANVIL_BIN selected the supplied executable; services bound to 127.0.0.1):
+  node --no-use-env-proxy test/scratch/bundle-repair/full/tests/acceptance.ts
+    (completed after repairing virtual-module resolution)
+  NODE_OPTIONS="--import <scratch trace module>" node --no-use-env-proxy test/scratch/bundle-repair/full/tests/acceptance.ts
+    (runtime-module coverage; passed)
+  npm --prefix test/scratch/bundle-repair/offline run demo -- --commands=restart,reconcile,quit
+    (fresh compact offline install; A-F, CLI reconciliation success/failure, then
+     documented same-database restart, reconciliation and owned-process cleanup)
+
+npm's update notifier was disabled during final npm command runs. npm emitted an
+inherited http-proxy option warning, but no dependency download was needed. The
+installer itself does not invoke npm. Foundry emitted existing timestamp/warp lint
+warnings; no contract/compiler error occurred.
+
+Check results and executable evidence
+-------------------------------------
+PASS  forge build with the unchanged pinned Solidity 0.8.26 configuration.
+PASS  forge fmt --check, with no Solidity edits.
+PASS  all 85 existing individual checks using the required fuzz seed. Foundry groups
+      the eight invariants into one runner result, so the footer is 78 passed,
+      0 failed, 0 skipped across seven suites. evidence/checks.json preserves the
+      85-function inventory from the original implementation.
+PASS  reproducible ABI check against existing Foundry artifacts; ABI unchanged.
+PASS  TypeScript typecheck, 8 unit/failure tests and backend formatting.
+PASS  fresh offline installation, with only the shipped compact archive.
+PASS  4 installer tests: clean install/check mode and preserving an existing install;
+      corrupted archive; dependency-lock drift; checksummed malicious symlink archive.
+      Failure cases exit nonzero and do not install dependencies outside staging.
+PASS  full A-F acceptance and negative checks against the running API with real Anvil
+      transactions, using the fresh compact offline installation.
+PASS  documented demo/restart/reconciliation/quit flow. After restart the same DB
+      reconciled at block 110; liabilities 80,000,000, token balance 80,000,123,
+      donation surplus 123. Harness cleanup stopped only its own child processes.
+PASS  deterministic dependency packaging: two identical rebuilds and integrity checks.
+PASS  local size check: ordinary repository source/data totaled 8,293,982 bytes;
+      a scratch source export totaled 7,700,249 bytes, below 8,388,608. This inventory
+      excludes existing protected lib/, Git metadata, task inputs and generated paths;
+      it includes the application runtime and source. These measurements precede the
+      small bundle-repair.json evidence file. The final ordinary inventory remains
+      below 8,350,000 bytes. The remote bundle_size verifier was not available here;
+      this is a local check, not a claim that its remote check was rerun.
+
+Requirements, each with evidence
+--------------------------------
+PASS  Read-only backend, exact amounts, local-only operation:
+      Read-method allowlist, loopback-only URL validation and HTTP binding remain.
+      Only the test harness transacts using unlocked public Anvil accounts, guarded
+      before every deployment/transaction by literal loopback, Anvil version and
+      chain ID 31337. Wrong chain 31338, non-local host and proxy transaction methods
+      are rejected. No signing keys are used. Observed backend methods are recorded
+      in evidence/acceptance.json. All monetary/uint256 values serialize as strings.
+PASS  Items, policies and original booking terms:
+      A verifies 50,000,000 deposit / 5,000,000 fee on a reservation after switching
+      the item's policy to 80,000,000 / 9,000,000. Immutable old terms remain unchanged.
+      Checkout makes the item Rented (2) and retains activeReservationId 1. Metadata,
+      listing, staff revocation and administrator handover are included.
+PASS  Settlement, credits, payments, fee request IDs and aggregate obligations:
+      A exercises return, cancellation, expiry, revoked-staff rejection, refund
+      withdrawal/empty retry, same fee ID, conflicting amount/recipient and a new ID.
+      Reverted transactions have no logs. RefundCredited alone increases credits;
+      settlement domain events adjust escrow/fees. Actual withdrawal amounts reduce
+      obligations. Reconciliation verifies all totals, including donation surplus.
+PASS  Inspectable canonical history and exactly-once ingestion:
+      Every record carries chain/contract, block number/hash, transaction hash/index
+      and log index. C injected 33 duplicated RPC log entries and observed exactly
+      32 canonical indexed history entries. Exact repeated payload normalization and
+      conflict rejection are application-provided. Ponder supplies ordering, fetch
+      overlap handling and short-reorg rollback; the handler adds a history-ID guard.
+PASS  Queries, freshness and finality:
+      Available equipment, reservation, renter history/credit, fee ID, snapshot,
+      history and sync endpoints are exercised against the running API. /sync and
+      every domain envelope report indexed block/hash, observed head, lag/error.
+      D reports current=false, RPC HTTP 503, and no fabricated head/lag during outage.
+      Framework health/readiness routes are not treated as proof of freshness.
+PASS  Same-block reconciliation, visible failure:
+      Reads are pinned to the indexed block and hash checked before/after. Compares
+      item/reservation/policy state, original terms, references, roles, fee request
+      results, refund credits and accounting totals. Liabilities may be below token
+      balance. The real CLI returns 0 for matching state and 1 for deliberate
+      corruption, without changing the database. Missing booking fields/credit rows
+      also fail. It never patches projections using latest-chain reads.
+PASS  A complete lifecycle; see acceptance.json and actual example API responses.
+PASS  B normal restart after activity, same persistent PGlite directory retained.
+PASS  B abrupt SIGKILL during visible partial catch-up: block 6 versus head 101,
+      lag 95, current=false; recovered and reconciled at block 101 without deleting DB.
+PASS  C real ingestion duplicate-log proxy, unique history and accounting assertions.
+PASS  D RPC interrupted while Anvil advances; ingestion failure observed and catch-up
+      after restoration verified. Outage response is explicitly stale.
+PASS  E four-block observed branch reverted; distinct canonical branch mined. Orphaned
+      reservation, refund/fee effects, completed fee ID and four history entries
+      disappear. Canonical reconciliation succeeds within the tested 120-second
+      chain-timestamp rollback window.
+PASS  F independent empty-database rebuild equals all domain data and history at
+      common block/hash 109; then reopens the original database. This supplements
+      same-database recovery rather than replacing it.
+
+Measured fresh-offline demo run (small synthetic dataset, not a throughput benchmark)
+------------------------------------------------------------------------------------
+Startup to indexed block 9:                         5,064 ms
+Same-database restart catch-up to block 56:          8,326 ms
+SIGKILL recovery catch-up to block 101:             13,946 ms
+RPC restoration catch-up to block 102:                 167 ms
+Independent empty-database rebuild to block 109:   15,277 ms
+Full F including reopening original DB:            30,314 ms
+Short reorg including transactions/reconciliation:  1,268 ms
+
+Failures encountered and repaired
+---------------------------------
+1. Reported source bundle exceeded 8 MiB because npm-cache.tar.gz was 40,050,000 bytes.
+   Full lossless recompression still exceeded the limit. The fixed dependency versions
+   remained unchanged; the compact runtime removes unused build tooling and package
+   files while preserving the requested application commands and unchanged Ponder core.
+2. The first compact bootstrap failed to resolve schema imports from a virtual URL.
+   The alias hook now resolves virtual-module imports relative to the project config.
+   Subsequent complete live runs, including the fresh offline run, passed.
+3. Initial packer validation correctly rejected pruning viem's real actions/test API
+   modules as upstream tests. Runtime-selected files and declarations now take
+   precedence over directory pruning. No incomplete archive was used for acceptance.
+4. The scratch unpacked registry files lacked npm's executable bits for CLI bins;
+   the installer now explicitly sets executable bits and links only tsc/prettier.
+   Fresh-install typecheck and formatting passed.
+
+Operational limits and checks not run
+------------------------------------
+NOT RUN / not validated: public deployment/RPC, funded wallets, PostgreSQL production,
+permanent hosting, cloud services, Docker, other OS/CPU offline installs, deep chain
+resets, large-scale load tests, independent security review, Slither/Mythril.
+No production readiness or platform-wide hosting capability is claimed.
+
+The reorg window is 120 seconds of chain timestamps, not 120 confirmations. Latest
+results are provisional. Window-finalized labels describe retained rollback history,
+not consensus finality. Data freshness is always read from the status envelope.
+The one-JSONB-row projection is intended for small local datasets; updates rewrite
+that snapshot. History pagination is a live provisional view. Freeze at a common block
+for multi-page audit comparisons; reconciliation needs historical state from the RPC.
+
+Operators supply the local RPC, chain ID, actual contract/deployment receipt, database
+location and API port. Startup pins chain ID/genesis/deployment hash/code hash/address
+and reorg settings, refusing mismatches instead of mixing deployments or deleting DBs.
+Keep Anvil alive across restarts, use a separate DB for a new chain/deployment, and
+monitor errors/lag. Stop before archiving data. Only a separate transaction-capable
+application or harness may expire bookings or pay refunds. This backend never does.
+
+Artifacts
+---------
+indexer/README.md: clean-checkout install, ABI, typecheck/test, demo, restart, queries,
+reconciliation, configuration, finality and responsibilities.
+indexer/vendor/README.md: scoped offline distribution, provenance, omissions, rebuild.
+indexer/evidence/acceptance.json and demo-acceptance.json: actual fresh offline A-F run.
+indexer/evidence/demo-restart.txt: actual same-database restart and reconciliation.
+indexer/evidence/example-reservation.json and example-snapshot.json: actual API responses.
+indexer/evidence/checks.json: versions, results and 85-check Foundry inventory.
+indexer/evidence/framework-recovery.txt: observed runtime/reorg log excerpts.
+indexer/tests/install.test.mjs: executable success/failure tests for the new installer.
+indexer/evidence/bundle-repair.json: archive integrity, local size bounds and repair checks.

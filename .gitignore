@@ -12,3 +12,9 @@ test/scratch/
 # submodule of this repository (the contracts are committed as plain files) and
 # it is excluded here so no submodule declaration is committed anywhere.
 lib/openzeppelin-contracts/.gitmodules
+
+# Local-only rental indexer data; the compact runtime in indexer/vendor IS delivered.
+indexer/node_modules/
+indexer/.data/
+indexer/.ponder/
+!indexer/.env.example

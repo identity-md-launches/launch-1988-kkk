@@ -1,0 +1,9 @@
+{
+  "rpcUrl": "http://127.0.0.1:8545",
+  "chainId": 31337,
+  "contractAddress": "REPLACE_WITH_LOCAL_ESCROW_DEPLOYMENT_ADDRESS",
+  "deploymentBlock": 2,
+  "databaseDirectory": "./.data/local-rental",
+  "apiPort": 42069,
+  "reorgWindow": 120
+}

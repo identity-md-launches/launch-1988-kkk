@@ -285,3 +285,14 @@ runner result, so its full-run footer reports 78 results; the per-function inven
 - Slither / Mythril and an independent adversarial review were not run in this iteration.
 - No public-chain deployment, explorer verification or multisig handover was performed
   (source-only delivery).
+
+## Local event-indexing backend trial
+
+The read-only TypeScript/Ponder backend is in [`indexer/`](indexer/README.md).
+It uses local PGlite and includes a compact offline Linux x64 application runtime, an isolated
+Anvil demo, real-transaction recovery/reorg tests, queries, and same-block reconciliation.
+See [`docs/BACKEND-TRIAL.txt`](docs/BACKEND-TRIAL.txt) for the checks actually run and
+limitations. This trial adds no public deployment or hosted service.
+The compact runner uses unchanged Ponder 0.18.2 indexing modules with Node 24 TypeScript
+loading; restart after source edits. Its offline package is scoped to the documented
+application commands and excludes the upstream browser-build toolchain.
