@@ -1,0 +1,300 @@
+{
+  "date": "2026-10-18",
+  "command": "npm --prefix test/scratch/reconciliation/indexer run test:acceptance",
+  "exitCode": 0,
+  "result": "passed",
+  "deployment": {
+    "chainId": 31337,
+    "contractAddress": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+    "deploymentBlock": 2,
+    "reorgWindow": 120
+  },
+  "evidence": [
+    {
+      "name": "startup",
+      "milliseconds": 14434,
+      "details": {
+        "indexed": {
+          "hash": "0xcd8aa5dc2abd5f32080a228d778ee050415b335f0fc13ae5b3a9f687f13e2928",
+          "number": "9",
+          "timestamp": "1792332409"
+        },
+        "complete": true,
+        "observedHead": {
+          "number": "9",
+          "hash": "0xcd8aa5dc2abd5f32080a228d778ee050415b335f0fc13ae5b3a9f687f13e2928",
+          "timestamp": "1792332409"
+        },
+        "lag": "0",
+        "current": true,
+        "connectionError": null,
+        "checkedAt": "2026-10-18T14:07:03.968Z",
+        "projectionFinality": "provisional",
+        "reorgWindowSeconds": 120,
+        "finalizedThroughTimestamp": "1792332289"
+      }
+    },
+    {
+      "name": "A lifecycle and original terms",
+      "milliseconds": 7186,
+      "details": {
+        "ok": true,
+        "blockNumber": "42",
+        "blockHash": "0x606550db5251ac836134c1cf04695b1b635444a880ddee670fecef146fbe262f",
+        "tokenBalance": "80000123",
+        "liabilities": "80000000",
+        "surplus": "123"
+      }
+    },
+    {
+      "name": "C duplicate logs through real RPC ingestion",
+      "milliseconds": 438,
+      "details": {
+        "duplicatedRpcLogs": 173,
+        "canonicalLogs": 32,
+        "indexedHistory": 32,
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "42",
+          "blockHash": "0x606550db5251ac836134c1cf04695b1b635444a880ddee670fecef146fbe262f",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "B stopped activity and same-database restart",
+      "milliseconds": 16171,
+      "details": {
+        "catchUpMs": 14772,
+        "databaseReused": true,
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "56",
+          "blockHash": "0xcd96102d34029552e6db95506c7e8948f69f6a6595df978ee901decf6f732bd4",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "B abrupt termination during catch-up and recovery",
+      "milliseconds": 30719,
+      "details": {
+        "catchUpMs": 20150,
+        "statusAtKill": {
+          "indexed": {
+            "hash": "0x764e65e43a88cc2e00566ae2452ac0d1221ec11c19555ed8b2610ee54c29aece",
+            "number": "5",
+            "timestamp": "1792332409"
+          },
+          "complete": true,
+          "observedHead": {
+            "number": "101",
+            "hash": "0xf4ba3f3d78949e7f64fe1b8b6b743c36906ee0cb6674beac61eada271b2ac08e",
+            "timestamp": "1792332570"
+          },
+          "lag": "96",
+          "current": false,
+          "connectionError": null,
+          "checkedAt": "2026-10-18T14:07:37.651Z",
+          "projectionFinality": "finalized-within-configured-window",
+          "reorgWindowSeconds": 120,
+          "finalizedThroughTimestamp": "1792332450"
+        },
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "101",
+          "blockHash": "0xf4ba3f3d78949e7f64fe1b8b6b743c36906ee0cb6674beac61eada271b2ac08e",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "D RPC outage while chain advances",
+      "milliseconds": 1360,
+      "details": {
+        "catchUpMs": 193,
+        "outageStatus": {
+          "indexed": {
+            "hash": "0xf4ba3f3d78949e7f64fe1b8b6b743c36906ee0cb6674beac61eada271b2ac08e",
+            "number": "101",
+            "timestamp": "1792332570"
+          },
+          "complete": true,
+          "observedHead": null,
+          "lag": null,
+          "current": false,
+          "connectionError": "RPC HTTP 503",
+          "checkedAt": "2026-10-18T14:07:58.512Z",
+          "projectionFinality": "provisional",
+          "reorgWindowSeconds": 120,
+          "finalizedThroughTimestamp": null
+        },
+        "ingestionFailures": 2,
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "102",
+          "blockHash": "0x1a51578ca57f4f5401eac3d89077298c81155fc8bb7f2ca15a6846e064e67377",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "E short reorganization",
+      "milliseconds": 5182,
+      "details": {
+        "orphanedBlocks": 4,
+        "reorgWindowSeconds": 120,
+        "removedHistory": 4,
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "109",
+          "blockHash": "0x4a826fa519c8c7098be1015ccbb6d774b102435638210be5dbfd54f9415cc85e",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "F independent empty-database rebuild at common block",
+      "milliseconds": 50691,
+      "details": {
+        "rebuildMs": 28564,
+        "commonBlock": {
+          "hash": "0x4a826fa519c8c7098be1015ccbb6d774b102435638210be5dbfd54f9415cc85e",
+          "number": "109",
+          "timestamp": "1792332603"
+        },
+        "domainAndHistoryEqual": true,
+        "reconciliation": {
+          "ok": true,
+          "blockNumber": "109",
+          "blockHash": "0x4a826fa519c8c7098be1015ccbb6d774b102435638210be5dbfd54f9415cc85e",
+          "tokenBalance": "80000123",
+          "liabilities": "80000000",
+          "surplus": "123"
+        }
+      }
+    },
+    {
+      "name": "configuration and read-only negative checks",
+      "milliseconds": 26078,
+      "details": {
+        "databaseMismatchRejected": true,
+        "readOnlyMethods": [
+          "eth_call",
+          "eth_chainId",
+          "eth_getBlockByHash",
+          "eth_getBlockByNumber",
+          "eth_getCode",
+          "eth_getLogs"
+        ]
+      }
+    },
+    {
+      "name": "reconciliation CLI success and mismatch exit status",
+      "milliseconds": 35871,
+      "details": {
+        "successExit": 0,
+        "rejected": [
+          {
+            "name": "escrow mismatch",
+            "exit": 1
+          },
+          {
+            "name": "missing completed fee",
+            "exit": 1
+          },
+          {
+            "name": "missing enabled staff",
+            "exit": 1
+          },
+          {
+            "name": "feesPaid zero",
+            "exit": 1
+          },
+          {
+            "name": "refundsPaid zero",
+            "exit": 1
+          },
+          {
+            "name": "unexpected fee",
+            "exit": 1
+          },
+          {
+            "name": "unexpected disabled staff",
+            "exit": 1
+          },
+          {
+            "name": "wrong staff state",
+            "exit": 1
+          },
+          {
+            "name": "wrong fee amount",
+            "exit": 1
+          },
+          {
+            "name": "wrong payment transaction",
+            "exit": 1
+          }
+        ],
+        "originalProjectionUnchanged": true,
+        "historyUnchanged": true,
+        "historicalSnapshotAfterLaterPayments": true,
+        "revokedStaffExit": 0,
+        "missingRevokedStaffRejected": true
+      }
+    },
+    {
+      "name": "reconciliation rejects inconsistent RPC event sources",
+      "milliseconds": 6832,
+      "details": {
+        "rejected": [
+          "conflicting duplicate",
+          "removed log",
+          "wrong emitter",
+          "out of range",
+          "orphan block hash",
+          "wrong transaction hash",
+          "missing deployment log",
+          "malformed event",
+          "staff event contradicts storage",
+          "fee event contradicts storage",
+          "reused request ID at distinct positions"
+        ],
+        "duplicateAndReorderedLogsAccepted": true,
+        "contiguousBoundedRanges": 6,
+        "beforeAndAfterHashChecks": true,
+        "incorrectDeploymentBlockRejected": true,
+        "projectionUnchanged": true
+      }
+    }
+  ],
+  "finalIndexed": {
+    "hash": "0xc6b95f9347eb4402ea62277e01551e4bbac61459fcb2887cee8809d00534a8d1",
+    "number": "116",
+    "timestamp": "1792332714"
+  },
+  "finalTotals": {
+    "fees": "13000000",
+    "escrow": "0",
+    "refunds": "0",
+    "feesPaid": "11000000",
+    "liabilities": "13000000",
+    "refundsPaid": "256000000"
+  },
+  "requiredCliFailures": {
+    "missing completed fee": "RECONCILIATION FAILED at 110:\nMissing fee request 0xb1530b27ed03e7c1ebb938aca8a007c827c4c9b045ffc7354c5ef9879209c193",
+    "missing enabled staff": "RECONCILIATION FAILED at 110:\nMissing staff 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc\nstaff 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc: indexed=undefined chain=true",
+    "feesPaid zero": "RECONCILIATION FAILED at 110:\nfeesPaid: indexed=\"0\" chain=\"10000000\"",
+    "refundsPaid zero": "RECONCILIATION FAILED at 110:\nrefundsPaid: indexed=\"0\" chain=\"140000000\""
+  }
+}

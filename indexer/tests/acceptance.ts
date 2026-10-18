@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { createServer } from "node:http";
 import { createInterface } from "node:readline";
+import { decodeEventLog } from "viem";
 import { RentalEscrowAbi as rentalAbi } from "../abis/RentalEscrow.ts";
 import { MockPaymentTokenAbi as tokenAbi } from "../abis/MockPaymentToken.ts";
 import { parseSettings, rpc, json } from "../shared/config.ts";
@@ -171,6 +172,7 @@ try {
     s = await synced();
     assert.equal(s.data.staff[c.staff.toLowerCase()], false);
     assert.equal(s.data.reservations["1"].status, 2);
+    assert.equal((await reconcile(s.data, config)).ok, true);
     await tx("setStaff", [c.staff, true]);
     await tx("confirmReturn", [1n], c.staff);
     await tx("withdrawRefund", [], c.renter);
@@ -543,33 +545,340 @@ try {
       assert.equal(success.code, 0);
       assert.match(success.output, /"ok":true/);
       const original = await synced();
-      const damaged = structuredClone(original);
-      damaged.data.totals.escrow = "123456";
+      assert.equal(original.data.staff[c.staff.toLowerCase()], true);
+      assert.ok(BigInt(original.data.totals.feesPaid) > 0n);
+      assert.ok(BigInt(original.data.totals.refundsPaid) > 0n);
+      const originalHistory = (await get(base, "/history?limit=1000")).events;
+      const request = key("fee-one");
+      assert.equal(original.data.feeRequests[request].completed, true);
+      let served = original;
       const api = createServer((_, res) => {
         res.writeHead(200, { "content-type": "application/json" });
-        res.end(json(damaged));
+        res.end(json(served));
       });
       await new Promise<void>((r) => api.listen(0, "127.0.0.1", r));
       const address = api.address();
       assert.ok(address && typeof address !== "string");
-      let failure;
+      const cases: [string, (data: typeof original.data) => void, RegExp][] = [
+        [
+          "escrow mismatch",
+          (d) => {
+            d.totals.escrow = "123456";
+          },
+          /escrow:/,
+        ],
+        [
+          "missing completed fee",
+          (d) => {
+            delete d.feeRequests[request];
+          },
+          /Missing fee request/,
+        ],
+        [
+          "missing enabled staff",
+          (d) => {
+            delete d.staff[c.staff.toLowerCase()];
+          },
+          /Missing staff/,
+        ],
+        [
+          "feesPaid zero",
+          (d) => {
+            d.totals.feesPaid = "0";
+          },
+          /feesPaid:/,
+        ],
+        [
+          "refundsPaid zero",
+          (d) => {
+            d.totals.refundsPaid = "0";
+          },
+          /refundsPaid:/,
+        ],
+        [
+          "unexpected fee",
+          (d) => {
+            d.feeRequests[key("never-paid")] = structuredClone(
+              d.feeRequests[request],
+            );
+          },
+          /Unexpected fee request/,
+        ],
+        // isStaff returns false for an untouched account; membership must be checked too.
+        [
+          "unexpected disabled staff",
+          (d) => {
+            d.staff[c.nextAdmin.toLowerCase()] = false;
+          },
+          /Unexpected staff/,
+        ],
+        [
+          "wrong staff state",
+          (d) => {
+            d.staff[c.staff.toLowerCase()] = false;
+          },
+          /staff .*indexed=false chain=true/,
+        ],
+        [
+          "wrong fee amount",
+          (d) => {
+            d.feeRequests[request].amount = "1";
+          },
+          /fee .*\.amount:/,
+        ],
+        [
+          "wrong payment transaction",
+          (d) => {
+            d.feeRequests[request].transactionHash =
+              d.feeRequests[key("fee-two")].transactionHash;
+          },
+          /fee .*\.transactionHash:/,
+        ],
+      ];
+      const rejected: { name: string; exit: number | null }[] = [];
       try {
-        failure = await execute(
-          `http://127.0.0.1:${address.port}`,
-          "reconcile-mismatch.log",
-        );
+        for (const [name, corrupt, diagnostic] of cases) {
+          served = structuredClone(original);
+          corrupt(served.data);
+          const damaged = structuredClone(served.data);
+          await assert.rejects(
+            () => reconcile(served.data, config),
+            diagnostic,
+            name,
+          );
+          assert.deepEqual(
+            served.data,
+            damaged,
+            "reconcile must not mutate its input",
+          );
+          const failure = await execute(
+            `http://127.0.0.1:${address.port}`,
+            `reconcile-invalid-${rejected.length}.log`,
+          );
+          assert.equal(failure.code, 1, `${name}: ${failure.output}`);
+          assert.match(failure.output, /RECONCILIATION FAILED/);
+          assert.match(failure.output, diagnostic);
+          assert.deepEqual((await synced()).data, original.data);
+          assert.deepEqual(
+            (await get(base, "/history?limit=1000")).events,
+            originalHistory,
+          );
+          rejected.push({ name, exit: failure.code });
+        }
       } finally {
         api.closeAllConnections();
         await new Promise<void>((r) => api.close(() => r()));
       }
-      assert.equal(failure.code, 1);
-      assert.match(failure.output, /RECONCILIATION FAILED/);
       assert.deepEqual((await synced()).data, original.data);
+      // Advance all three event-derived fields after retaining a valid snapshot.
+      // Reconciliation of the old snapshot must still use its exact block.
+      await reserve(2n, 1n, 50000000n, "reconciliation-later");
+      await tx("cancel", [5n], c.renter);
+      await tx("withdrawRefund", [], c.renter);
+      await tx("withdrawFees", [
+        key("reconciliation-later-fee"),
+        c.admin,
+        1000000n,
+      ]);
+      await tx("setStaff", [c.staff, false]);
+      const revoked = await synced();
+      assert.equal(revoked.data.staff[c.staff.toLowerCase()], false);
+      assert.notEqual(
+        revoked.data.totals.refundsPaid,
+        original.data.totals.refundsPaid,
+      );
+      assert.notEqual(
+        revoked.data.totals.feesPaid,
+        original.data.totals.feesPaid,
+      );
+      assert.equal((await reconcile(original.data, config)).ok, true);
+      assert.equal((await reconcile(revoked.data, config)).ok, true);
+      const revokedCli = await execute(base, "reconcile-revoked.log");
+      assert.equal(revokedCli.code, 0, revokedCli.output);
+      assert.match(revokedCli.output, /"ok":true/);
+      const missingRevoked = structuredClone(revoked.data);
+      delete missingRevoked.staff[c.staff.toLowerCase()];
+      await assert.rejects(
+        () => reconcile(missingRevoked, config),
+        /Missing staff/,
+      );
       return {
         successExit: success.code,
-        mismatchExit: failure.code,
+        rejected,
         originalProjectionUnchanged: true,
+        historyUnchanged: true,
+        historicalSnapshotAfterLaterPayments: true,
+        revokedStaffExit: revokedCli.code,
+        missingRevokedStaffRejected: true,
       };
+    },
+  );
+  await measure(
+    "reconciliation rejects inconsistent RPC event sources",
+    async () => {
+      const original = await synced();
+      const faulty = await proxy(url);
+      faulty.state.duplicates = false;
+      const faultConfig = { ...config, rpcUrl: faulty.url };
+      const eventName = (log: any) =>
+        decodeEventLog({ abi: rentalAbi, topics: log.topics, data: log.data })
+          .eventName;
+      const change = (name: string, fn: (log: any) => any) => (logs: any[]) =>
+        logs.map((log) => (eventName(log) === name ? fn(log) : log));
+      const cases: [string, (logs: any[], filter: any) => any[], RegExp][] = [
+        [
+          "conflicting duplicate",
+          (logs) =>
+            logs.length ? [...logs, { ...logs[0], data: "0x" }] : logs,
+          /Conflicting RPC logs/,
+        ],
+        [
+          "removed log",
+          (logs) => logs.map((log) => ({ ...log, removed: true })),
+          /metadata\/range/,
+        ],
+        [
+          "wrong emitter",
+          (logs) => logs.map((log) => ({ ...log, address: c.renter })),
+          /metadata\/range/,
+        ],
+        [
+          "out of range",
+          (logs, filter) =>
+            logs.length
+              ? [
+                  {
+                    ...logs[0],
+                    blockNumber: `0x${(BigInt(filter.toBlock) + 1n).toString(16)}`,
+                  },
+                  ...logs.slice(1),
+                ]
+              : logs,
+          /metadata\/range/,
+        ],
+        [
+          "orphan block hash",
+          (logs) =>
+            logs.map((log) => ({ ...log, blockHash: key("orphan-source") })),
+          /canonical block\/transaction/,
+        ],
+        [
+          "wrong transaction hash",
+          (logs) =>
+            logs.map((log) => ({
+              ...log,
+              transactionHash: key("wrong-source-transaction"),
+            })),
+          /canonical block\/transaction/,
+        ],
+        [
+          "missing deployment log",
+          (logs) =>
+            logs.filter(
+              (log) =>
+                BigInt(log.blockNumber) !== BigInt(config.deploymentBlock),
+            ),
+          /Missing escrow constructor event/,
+        ],
+        [
+          "malformed event",
+          change("StaffUpdated", (log) => ({ ...log, data: "0x" })),
+          /Data size|data size/,
+        ],
+        [
+          "staff event contradicts storage",
+          change("StaffUpdated", (log) => ({
+            ...log,
+            data: `0x${"0".repeat(63)}1`,
+          })),
+          /staff event\/storage/,
+        ],
+        [
+          "fee event contradicts storage",
+          change("FeesWithdrawn", (log) => ({
+            ...log,
+            data: `0x${"0".repeat(63)}1`,
+          })),
+          /fee event\/storage/,
+        ],
+        [
+          "reused request ID at distinct positions",
+          change("FeesWithdrawn", (log) => ({
+            ...log,
+            topics: [log.topics[0], key("fee-one"), log.topics[2]],
+          })),
+          /Conflicting fee request events/,
+        ],
+      ];
+      const rejected = [];
+      try {
+        // Exercise sorting and duplicate normalization independently of Ponder ingestion.
+        faulty.state.duplicates = true;
+        const ranges: [bigint, bigint][] = [];
+        faulty.state.transform = (method, params, result) => {
+          if (method !== "eth_getLogs") return result;
+          const filter = params[0] as any;
+          ranges.push([BigInt(filter.fromBlock), BigInt(filter.toBlock)]);
+          return result.reverse();
+        };
+        assert.equal((await reconcile(original.data, faultConfig)).ok, true);
+        assert.ok(ranges.length > 1);
+        assert.equal(ranges[0]![0], BigInt(config.deploymentBlock));
+        assert.equal(ranges.at(-1)![1], BigInt(original.data.indexed.number));
+        for (let i = 1; i < ranges.length; i++)
+          assert.equal(ranges[i]![0], ranges[i - 1]![1] + 1n);
+        faulty.state.duplicates = false;
+        for (const [name, mutate, diagnostic] of cases) {
+          faulty.state.transform = (method, params, result) =>
+            method === "eth_getLogs" ? mutate(result, params[0]) : result;
+          await assert.rejects(
+            () => reconcile(original.data, faultConfig),
+            diagnostic,
+            name,
+          );
+          rejected.push(name);
+        }
+        // Verify both canonical anchor checks, including an observed change only at the end.
+        for (const occurrence of [1, 2]) {
+          let reads = 0;
+          faulty.state.transform = (method, params, result) => {
+            if (
+              method === "eth_getBlockByNumber" &&
+              BigInt(params[0] as string) ===
+                BigInt(original.data.indexed.number) &&
+              ++reads === occurrence
+            )
+              return { ...result, hash: key("changed-reconciliation-anchor") };
+            return result;
+          };
+          await assert.rejects(
+            () => reconcile(original.data, faultConfig),
+            occurrence === 1
+              ? /not canonical/
+              : /reorganized during reconciliation/,
+          );
+        }
+        await assert.rejects(
+          () =>
+            reconcile(original.data, {
+              ...config,
+              deploymentBlock: config.deploymentBlock + 1,
+            }),
+          /Missing escrow constructor event/,
+        );
+        assert.deepEqual((await synced()).data, original.data);
+        assert.equal((await reconcile(original.data, config)).ok, true);
+        return {
+          rejected,
+          duplicateAndReorderedLogsAccepted: true,
+          contiguousBoundedRanges: ranges.length,
+          beforeAndAfterHashChecks: true,
+          incorrectDeploymentBlockRejected: true,
+          projectionUnchanged: true,
+        };
+      } finally {
+        await faulty.close();
+      }
     },
   );
   const final = await synced();

@@ -1,8 +1,10 @@
-import { createPublicClient, http, type Address } from "viem";
+import { createPublicClient, custom, type Address } from "viem";
 import { RentalEscrowAbi } from "../abis/RentalEscrow.ts";
 import { MockPaymentTokenAbi } from "../abis/MockPaymentToken.ts";
 import { json, type Settings } from "./config.ts";
 import type { Projection } from "./domain.ts";
+import { readRpc } from "./transport.ts";
+import { reconciliationEvents } from "./reconcile-events.ts";
 export async function reconcile(data: Projection, config: Settings) {
   if (!data?.indexed || !data.complete)
     throw new Error("Cannot reconcile an incomplete projection");
@@ -12,19 +14,22 @@ export async function reconcile(data: Projection, config: Settings) {
   )
     throw new Error("Snapshot identity mismatch");
   const client = createPublicClient({
-    transport: http(config.rpcUrl, {
-      timeout: 1500,
-      retryCount: 0,
-      fetchOptions: { redirect: "error" },
-    }),
+    transport: custom(
+      {
+        request: ({ method, params }) =>
+          readRpc(config.rpcUrl, method, params as unknown[] | undefined),
+      },
+      { retryCount: 0 },
+    ),
     cacheTime: 0,
   });
   if ((await client.getChainId()) !== config.chainId)
     throw new Error("RPC chain ID mismatch");
   const blockNumber = BigInt(data.indexed.number);
   const before = await client.getBlock({ blockNumber });
-  if (before.hash !== data.indexed.hash)
+  if (before.number !== blockNumber || before.hash !== data.indexed.hash)
     throw new Error("Snapshot block hash is not canonical");
+  const expected = await reconciliationEvents(client, config, before);
   const read = async (functionName: string, args: unknown[] = []) =>
     client.readContract({
       address: config.contractAddress,
@@ -99,8 +104,26 @@ export async function reconcile(data: Projection, config: Settings) {
     ),
     data.totals.refunds,
   );
-  for (const [address, enabled] of Object.entries(data.staff))
-    equal(`staff ${address}`, enabled, await read("isStaff", [address]));
+  const identities = (
+    label: string,
+    local: Record<string, unknown>,
+    canonical: Record<string, unknown>,
+  ) => {
+    for (const id of Object.keys(canonical))
+      if (!Object.hasOwn(local, id)) errors.push(`Missing ${label} ${id}`);
+    for (const id of Object.keys(local))
+      if (!Object.hasOwn(canonical, id))
+        errors.push(`Unexpected ${label} ${id}`);
+  };
+  identities("staff", data.staff, expected.staff);
+  for (const [address, enabled] of Object.entries(expected.staff)) {
+    equal(`staff ${address}`, data.staff[address], enabled);
+    equal(
+      `staff event/storage ${address}`,
+      enabled,
+      await read("isStaff", [address]),
+    );
+  }
   equal("admin", data.admin, String(await read("admin")).toLowerCase());
   const pending = String(await read("pendingAdmin")).toLowerCase();
   equal(
@@ -108,12 +131,15 @@ export async function reconcile(data: Projection, config: Settings) {
     data.pendingAdmin,
     /^0x0{40}$/.test(pending) ? null : pending,
   );
-  for (const [id, r] of Object.entries(data.feeRequests)) {
+  identities("fee request", data.feeRequests, expected.feeRequests);
+  for (const [id, r] of Object.entries(expected.feeRequests)) {
+    if (Object.hasOwn(data.feeRequests, id))
+      obj(`fee ${id}`, data.feeRequests[id]!, r);
     const [recipient, amount, completed] = await read("feeWithdrawalById", [
       id,
     ]);
     equal(
-      `fee ${id}`,
+      `fee event/storage ${id}`,
       { recipient: r.recipient, amount: r.amount, completed: r.completed },
       {
         recipient: recipient.toLowerCase(),
@@ -122,6 +148,8 @@ export async function reconcile(data: Projection, config: Settings) {
       },
     );
   }
+  equal("refundsPaid", data.totals.refundsPaid, expected.refundsPaid);
+  equal("feesPaid", data.totals.feesPaid, expected.feesPaid);
   for (const [field, method] of [
     ["escrow", "totalEscrowed"],
     ["refunds", "totalRefundCredits"],
@@ -140,7 +168,7 @@ export async function reconcile(data: Projection, config: Settings) {
   if (balance < BigInt(data.totals.liabilities))
     errors.push("Token balance is below liabilities");
   const after = await client.getBlock({ blockNumber });
-  if (after.hash !== before.hash)
+  if (after.number !== blockNumber || after.hash !== before.hash)
     errors.push("Chain reorganized during reconciliation");
   if (errors.length)
     throw new Error(

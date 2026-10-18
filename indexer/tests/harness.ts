@@ -249,6 +249,9 @@ export async function proxy(target: string) {
     ingestionOutages: 0,
     requests: 0,
     methods: new Set<string>(),
+    transform: undefined as
+      | ((method: string, params: unknown[], result: any) => any)
+      | undefined,
   };
   const server = httpServer(async (req, res) => {
     if (req.method !== "POST") {
@@ -290,7 +293,7 @@ export async function proxy(target: string) {
       });
       const value = await response.json();
       const values = Array.isArray(value) ? value : [value];
-      for (let i = 0; i < values.length; i++)
+      for (let i = 0; i < values.length; i++) {
         if (
           requests[i]?.method === "eth_getLogs" &&
           state.duplicates &&
@@ -302,6 +305,13 @@ export async function proxy(target: string) {
             log,
           ]);
         }
+        if (state.transform && values[i].result !== undefined)
+          values[i].result = state.transform(
+            requests[i].method,
+            requests[i].params,
+            values[i].result,
+          );
+      }
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify(Array.isArray(value) ? values : values[0]));
     } catch (e) {

@@ -17,7 +17,7 @@ executable for the harness. The compiler remains pinned by the existing root
 ```sh
 forge build
 forge fmt --check
-FOUNDRY_FUZZ_SEED=0xc6b413a08f5d387af6fe6349ea383bd6478498761e5e040031705165958de293 forge test
+FOUNDRY_FUZZ_SEED=0xbe52dbff4856726889961e0a0e282e7034542c0d1442fa79b4e1fb66b03a544b forge test
 cd indexer
 node --no-use-env-proxy scripts/install.mjs
 npm run abi:check
@@ -249,22 +249,63 @@ RENTAL_CONFIG=/absolute/path/to/config.json npm run reconcile -- http://127.0.0.
 ```
 
 This reads `/snapshot` once and pins **all** contract/token calls to its indexed block
-number, checking that block's hash before and after the reads. It compares item and
-reservation counts/state/terms, immutable policies, reservation references, staff/admin,
-refund credits, fee request results, escrow/refund/fee totals and total liabilities.
-It accepts token balance **greater than** liabilities (donations), and rejects balance
-below liabilities. It requires a complete, canonical snapshot; catch-up lag alone is not
-an error because the comparison still uses the same historical block.
+number, checking that block's number/hash before and after reconciliation. Catch-up lag
+alone is acceptable: later payments or staff changes must not affect that comparison.
+The snapshot must be complete and belong to the configured chain and escrow.
 
-A mismatch prints `RECONCILIATION FAILED` and exits 1. It never patches the database with
-latest chain reads. The acceptance suite checks both successful CLI exit 0 and a real
-CLI exit 1 for a deliberately corrupted API snapshot, then confirms the actual projection
-was not modified. The local RPC must retain historical state for the indexed block.
+`shared/reconcile-events.ts` independently fetches escrow logs from the configured
+deployment block **through that same indexed block, inclusive**, in consecutive ranges
+of at most 20 blocks. It does not read the projection or `/history`. The configured
+deployment block must contain the constructor's `AdminTransferred` event. It establishes:
+
+* Exactly the fee-request IDs emitted by `FeesWithdrawn`, with recipient, amount,
+  completed status and transaction hash. Missing and unexpected records fail. Recipient,
+  amount and completion are also compared to `feeWithdrawalById` at the indexed block.
+* Exactly the accounts ever emitted by `StaffUpdated`, with their last canonical value.
+  An explicit revocation remains a `false` record; deleting it is an error. Each expected
+  value is also compared to `isStaff` at the indexed block. An untouched account does not
+  become an expected staff record merely because `isStaff` returns `false`.
+* Cumulative `totals.refundsPaid` from `RefundWithdrawn.amount` and `totals.feesPaid` from
+  `FeesWithdrawn.amount`, using `bigint` throughout. These are historical payments,
+  independently checked even when current obligations are zero.
+
+Exact duplicate log payloads are normalized before decoding. Conflicting duplicates,
+removed/out-of-range/wrong-emitter logs, malformed ABI data, noncanonical block hashes,
+transaction hash/index mismatches, repeated fee IDs at distinct positions and disagreements
+between events and storage fail visibly. Logs are sorted by block/log position before
+applying staff updates. RPC errors and observed reorgs fail; rerun after canonical catch-up.
+
+Existing checks remain: item/reservation/policy counts and values, accepted booking terms,
+reservation references, admin/pending admin, renter credits and their sum, escrow,
+outstanding refunds, accrued fees and liabilities. Token balance may exceed liabilities
+(the difference is reported as donation surplus); a shortfall fails. All comparisons and
+payments use exact integer values, with decimal strings at the API boundary.
+
+A domain mismatch prints `RECONCILIATION FAILED`; source/RPC errors print their cause.
+Both exit 1; valid data exits 0 with `ok:true`. Reconciliation has no database write or
+transaction capability, never patches input data, and never substitutes latest state.
+Tests separately remove a completed fee request and enabled staff member, change each
+payment total, add unexpected records and corrupt fee/staff values. Every invalid
+snapshot is rejected by the function and real CLI, with projection/history unchanged.
+Valid revocation and historical snapshots after later payments also pass.
+
+**Coverage limits:** this is an audit against a trusted local RPC's complete escrow event
+stream and historical state, not a cryptographic receipt/completeness proof. Block and
+transaction membership checks do not prove log payload inclusion in a receipt. A provider
+that silently omits or consistently fabricates history can defeat checks not independently
+exposed by storage, especially past refund totals or revoked staff membership. RPC history
+and archive state must be available; there is no fallback. `/history`, `eventCount`,
+`lastEvent`, cursor timestamp and arbitrary snapshot schema fields are not fully audited.
+Token transfer history, provenance of surplus, pending/reverted transactions and off-chain
+payment intent are not established. The full scan and header cache grow with chain history;
+only small local datasets and short reorgs have been exercised, not production scale or
+public-chain finality. No claim of a security audit or production approval is made.
 
 ## Tests and evidence
 
 `npm test` covers arithmetic, immutable terms, state transitions, duplicate/conflicting
-logs, configuration rejection and lossless uint256 serialization. `npm run test:acceptance`
+logs, configuration rejection, lossless uint256 serialization, and independent payment
+sums above JavaScript's safe integer range. `npm run test:acceptance`
 uses actual Anvil receipts and assertions against the running Ponder query API:
 
 * A: reserve/checkout/return/cancel/expire, policy change, revoked staff failure, refund
@@ -279,12 +320,18 @@ uses actual Anvil receipts and assertions against the running Ponder query API:
   reservation, refund/fee effects, fee request and history disappear, then reconcile.
 * F: replay into a separate empty database and compare all domain data/history at the
   same block, then reopen the original database again.
+* Reconciliation: independently corrupted snapshots through the real CLI; canonical
+  source faults through a read-only RPC proxy; reversed/duplicated logs; consecutive
+  bounded log ranges; both block-hash guards; incorrect deployment block; valid staff
+  revocation and reconciliation of an older snapshot after new payments.
 
 All polling has deadlines. Individual RPC calls have 1.5-second timeouts; transactions
 have 10-second receipt deadlines; catch-up is bounded to 60 seconds (90 after crash).
 No real-time wait longer than the task budget is required. See
 [`../docs/BACKEND-TRIAL.txt`](../docs/BACKEND-TRIAL.txt) for measured results and failures
 encountered during development. Tests are evidence, not a security audit.
+The targeted completeness repair's commands, results, assumptions and remaining limits
+are recorded in [`../docs/RECONCILIATION-REPAIR.md`](../docs/RECONCILIATION-REPAIR.md).
 
 Official references used for this pinned implementation:
 [Foundry integration and disabling RPC cache](https://ponder.sh/docs/guides/foundry),

@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-18",
+  "tools": {
+    "foundry": "1.8.3",
+    "compiler": "0.8.26+commit.8a97fa7a",
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "tar": "1.35",
+    "xz": "5.4.5",
+    "ponder": "0.18.2",
+    "pglite": "0.2.13",
+    "viem": "2.57.7",
+    "hono": "4.13.13",
+    "typescript": "5.9.3",
+    "prettier": "3.6.2",
+    "@types/node": "24.10.1"
+  },
+  "fuzzSeed": "0xbe52dbff4856726889961e0a0e282e7034542c0d1442fa79b4e1fb66b03a544b",
+  "results": {
+    "forgeBuild": "passed",
+    "forgeTest": "passed",
+    "individualFoundryChecks": 85,
+    "runnerResults": 78,
+    "invariantRuns": 64,
+    "invariantDepth": 48,
+    "invariantCalls": 3072,
+    "fuzzRuns": 256,
+    "forgeFormat": "passed",
+    "offlineInstall": "passed, 8860 verified files",
+    "installerTests": 4,
+    "unitTests": 9,
+    "typecheck": "passed",
+    "abiCheck": "passed",
+    "backendFormat": "passed",
+    "liveAcceptance": "passed, see reconciliation-acceptance.json",
+    "demoRestartReconciliation": "passed, see reconciliation-demo.json",
+    "allRequestedLocalChecksCompleted": true
+  },
+  "preservedFileHashesVerified": 337,
+  "testedSourceSha256": {
+    "indexer/shared/reconcile.ts": "8ce6607abd546a16a9bc54e7218e7804fa77abba7ca03ecafbc7767e92f56896",
+    "indexer/shared/reconcile-events.ts": "8770d558431b33f5d88b530ae595392fb4afcc2e8fed61a7908ed8be39373840",
+    "indexer/tests/acceptance.ts": "2f6709f07ad1ed0cd70166a3d04c6330f621fd95ce042d796a73f8407af92476",
+    "indexer/tests/harness.ts": "faca9f40130aae947226b592e2e343666351384b0771d6bcfefa9f241a3f9df0",
+    "indexer/tests/unit.test.ts": "a5a7c21adbf6f1a3346fb51708ef8ac04c61047d0e98bfbde419148d18d637a4"
+  },
+  "foundrySummary": "Ran 7 test suites in 2.95s (4.78s CPU time): 78 tests passed, 0 failed, 0 skipped (78 total tests)",
+  "priorExpandedRun": {
+    "result": "failed new fixture diagnostic assertion after A-F and all CLI corruptions passed",
+    "cause": "range fault moved every log to one block, creating conflicting positions before range validation",
+    "repair": "move only one log; keep rejection assertion; full rerun passed"
+  },
+  "notRun": [
+    "public-chain or funded-wallet operation",
+    "production PostgreSQL/hosting",
+    "deep reorg/reset tests",
+    "large-history/load benchmarks",
+    "other runtime platforms",
+    "Slither/Mythril",
+    "independent security audit"
+  ]
+}

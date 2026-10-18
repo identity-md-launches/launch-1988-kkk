@@ -1,6 +1,12 @@
 RENTAL READ-ONLY BACKEND TRIAL — LOCAL IMPLEMENTATION AND BUNDLE REPAIR
 Date: 2026-10-17
 
+Historical report: the claims below about checking all accounting totals and role/fee
+records were incomplete. The 2026-10-18 follow-up repairs missing fee/staff identities
+and unchecked cumulative payment totals. See RECONCILIATION-REPAIR.md for the current
+guarantees, actual rerun results and coverage limits; this earlier report is retained
+as the record of the original trial.
+
 Result
 ------
 PASS: the local backend and real Anvil acceptance A-F work from a fresh offline

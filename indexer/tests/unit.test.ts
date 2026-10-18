@@ -2,6 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { apply, initial, type RentalEvent } from "../shared/domain.ts";
 import { localUrl, parseSettings, json } from "../shared/config.ts";
+import {
+  encodeEventTopics,
+  type Block,
+  type PublicClient,
+  type Hex,
+} from "viem";
+import { RentalEscrowAbi } from "../abis/RentalEscrow.ts";
+import { reconciliationEvents } from "../shared/reconcile-events.ts";
 // Public synthetic Anvil development addresses, used only in unit fixtures.
 const admin = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
 const renter = "0x70997970c51812dc3a010c7d01b50e0d17dc79c8";
@@ -208,4 +216,70 @@ test("RPC overlaps are normalized; conflicting logs and transaction methods fail
     () => readRpc("http://127.0.0.1:8545", "eth_sendTransaction"),
     /refuses/,
   );
+});
+
+test("independent event audit preserves large cumulative payments and orders same-block staff updates", async () => {
+  // Synthetic ABI fixtures supplement the real Anvil tests (whose fixed token supply
+  // is below Number.MAX_SAFE_INTEGER). No projection or history is provided here.
+  const word = (value: bigint) =>
+    `0x${value.toString(16).padStart(64, "0")}` as Hex;
+  const block = {
+    number: 2n,
+    hash: word(10n),
+    transactions: [word(11n)],
+  } as Block;
+  const logs: any[] = [];
+  const emit = (
+    name:
+      | "AdminTransferred"
+      | "StaffUpdated"
+      | "FeesWithdrawn"
+      | "RefundWithdrawn",
+    args: any,
+    value?: bigint,
+  ) => {
+    logs.push({
+      address: escrow,
+      blockNumber: block.number,
+      blockHash: block.hash,
+      transactionHash: block.transactions[0],
+      transactionIndex: 0,
+      logIndex: logs.length,
+      removed: false,
+      topics: encodeEventTopics({
+        abi: RentalEscrowAbi,
+        eventName: name,
+        args,
+      }),
+      data: value === undefined ? "0x" : word(value),
+    });
+  };
+  emit("AdminTransferred", {
+    previousAdmin: `0x${"0".repeat(40)}`,
+    newAdmin: admin,
+  });
+  const large = (1n << 200n) + 1n;
+  emit("FeesWithdrawn", { requestId: word(1n), to: admin }, large);
+  emit("RefundWithdrawn", { beneficiary: renter }, large + 2n);
+  emit("StaffUpdated", { account: renter }, 1n);
+  emit("FeesWithdrawn", { requestId: word(2n), to: admin }, 3n);
+  emit("RefundWithdrawn", { beneficiary: renter }, 4n);
+  emit("StaffUpdated", { account: renter }, 0n);
+  const config = parseSettings({
+    rpcUrl: "http://127.0.0.1:8545",
+    contractAddress: escrow,
+    deploymentBlock: 2,
+    databaseDirectory: ".data/unit",
+  });
+  const client = {
+    getLogs: async () => [...logs].reverse(),
+    getBlock: async () => {
+      throw new Error("Indexed header should be reused");
+    },
+  } as unknown as PublicClient;
+  const result = await reconciliationEvents(client, config, block);
+  assert.equal(result.feesPaid, large + 3n);
+  assert.equal(result.refundsPaid, large + 6n);
+  assert.equal(result.feeRequests[word(1n)]!.amount, large.toString());
+  assert.deepEqual(result.staff, { [renter]: false });
 });
